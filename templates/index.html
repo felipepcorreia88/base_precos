@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🛒 Busca de Preços - Multi-Store</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .search-section {
+            padding: 30px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .search-form {
+            display: flex;
+            gap: 15px;
+            align-items: end;
+        }
+
+        .form-group {
+            flex: 1;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #495057;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #4facfe;
+            box-shadow: 0 0 0 3px rgba(79, 172, 254, 0.1);
+        }
+
+        .btn-search {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .btn-search:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-search:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #6c757d;
+        }
+
+        .loading .spinner {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #4facfe;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .results-section {
+            padding: 30px;
+        }
+
+        .stats-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .stat-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            backdrop-filter: blur(10px);
+        }
+
+        .stat-value {
+            font-size: 1.8em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+
+        .products-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .products-table thead {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .products-table th,
+        .products-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .products-table th {
+            font-weight: 600;
+            font-size: 1.1em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .products-table tbody tr {
+            transition: background-color 0.2s ease;
+        }
+
+        .products-table tbody tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        .products-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .product-image-cell {
+            width: 80px;
+            padding: 10px !important;
+        }
+
+        .product-image {
+            width: 60px;
+            height: 60px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            margin: 0 auto;
+        }
+
+        .product-image img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .product-image .no-image {
+            color: #6c757d;
+            font-size: 1.5em;
+        }
+
+        .product-name-cell {
+            max-width: 300px;
+            min-width: 200px;
+        }
+
+        .product-name {
+            font-weight: 600;
+            color: #212529;
+            line-height: 1.4;
+            margin-bottom: 5px;
+        }
+
+        .product-store {
+            font-size: 0.9em;
+            color: #6c757d;
+            font-style: italic;
+        }
+
+        .product-price-cell {
+            width: 120px;
+            text-align: center;
+        }
+
+        .product-price {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #28a745;
+        }
+
+        .product-price-original {
+            font-size: 0.9em;
+            color: #6c757d;
+            text-decoration: line-through;
+            display: block;
+            margin-top: 2px;
+        }
+
+        .product-link-cell {
+            width: 140px;
+            text-align: center;
+        }
+
+        .product-link {
+            display: inline-block;
+            background: #4facfe;
+            color: white;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 0.9em;
+            transition: background 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .product-link:hover {
+            background: #3d8bfe;
+            color: white;
+            text-decoration: none;
+        }
+
+        .product-link.disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+        }
+
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #f5c6cb;
+            margin: 20px 0;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 60px 20px;
+            color: #6c757d;
+        }
+
+        .no-results .icon {
+            font-size: 4em;
+            margin-bottom: 20px;
+        }
+
+        .filter-info {
+            background: #e3f2fd;
+            color: #1976d2;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid #2196f3;
+        }
+
+        @media (max-width: 768px) {
+            .search-form {
+                flex-direction: column;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .products-table {
+                font-size: 0.9em;
+            }
+            
+            .products-table th,
+            .products-table td {
+                padding: 10px 8px;
+            }
+            
+            .product-image-cell {
+                width: 60px;
+            }
+            
+            .product-image {
+                width: 50px;
+                height: 50px;
+            }
+            
+            .product-name-cell {
+                max-width: 200px;
+                min-width: 150px;
+            }
+            
+            .product-link {
+                padding: 6px 12px;
+                font-size: 0.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🛒 Busca de Preços</h1>
+            <p>Encontre os melhores preços com análise estatística completa</p>
+        </div>
+
+        <div class="search-section">
+            <form class="search-form" id="searchForm">
+                <div class="form-group">
+                    <label for="termo">Termo de Busca:</label>
+                    <input type="text" id="termo" name="termo" placeholder="Ex: smartphone samsung, notebook dell, fone bluetooth" required>
+                </div>
+                <div class="form-group">
+                    <label for="fonte">Base de Dados:</label>
+                    <select id="fonte" name="fonte">
+                        <option value="mercadolivre" selected>Mercado Livre</option>
+                        <option value="buscape">BuscaPé</option>
+                        <option value="zoom">Zoom</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-search" id="btnSearch">
+                    🔍 Buscar
+                </button>
+            </form>
+        </div>
+
+        <div id="loading" class="loading" style="display: none;">
+            <div class="spinner"></div>
+            <p>Buscando produtos...</p>
+        </div>
+
+        <div id="results" class="results-section" style="display: none;">
+            <!-- Resultados serão inseridos aqui -->
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('searchForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const termo = document.getElementById('termo').value.trim();
+            const fonte = document.getElementById('fonte').value;
+            
+            if (!termo) {
+                alert('Por favor, digite um termo de busca');
+                return;
+            }
+            
+            // Mostra loading
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('results').style.display = 'none';
+            document.getElementById('btnSearch').disabled = true;
+            
+            try {
+                const response = await fetch('/buscar', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        termo: termo,
+                        fonte: fonte
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.erro) {
+                    showError(data.erro);
+                } else {
+                    showResults(data);
+                }
+                
+            } catch (error) {
+                showError('Erro na comunicação com o servidor: ' + error.message);
+            } finally {
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('btnSearch').disabled = false;
+            }
+        });
+        
+        function showError(message) {
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = `
+                <div class="error">
+                    <strong>❌ Erro:</strong> ${message}
+                </div>
+            `;
+            resultsDiv.style.display = 'block';
+        }
+        
+        function showResults(data) {
+            const resultsDiv = document.getElementById('results');
+            
+            if (!data.produtos || data.produtos.length === 0) {
+                resultsDiv.innerHTML = `
+                    <div class="no-results">
+                        <div class="icon">🔍</div>
+                        <h3>Nenhum produto encontrado</h3>
+                        <p>Tente usar termos diferentes ou mais específicos</p>
+                    </div>
+                `;
+            } else {
+                let html = '';
+                
+                // Filtro aplicado
+                const outliers_removidos = data.total_encontrado - data.total_filtrado;
+                const fonte_nome = data.fonte || 'Mercado Livre';
+                html += `
+        <div class="filter-info">
+            <strong>🎯 Fonte:</strong> ${fonte_nome}
+            <br><strong>🔍 Busca:</strong> "${data.termo}"
+            <br><strong>📊 Produtos encontrados:</strong> ${data.total_encontrado} produtos inicialmente
+            <br><strong>✅ Produtos após filtro:</strong> ${data.total_filtrado} produtos (${outliers_removidos} outliers removidos)
+            <br><strong>📈 Filtro inteligente:</strong> Mediana ± 1 desvio padrão (remove preços extremos)
+        </div>
+                `;
+                
+                // Estatísticas
+                if (data.estatisticas) {
+                    html += `
+                        <div class="stats-card">
+                            <h2>📊 Resumo Estatístico</h2>
+                            <div class="stats-grid">
+                                <div class="stat-item">
+                                    <div class="stat-value">${data.estatisticas.quantidade}</div>
+                                    <div class="stat-label">Total de Produtos</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-value">R$ ${data.estatisticas.minimo.toFixed(2)}</div>
+                                    <div class="stat-label">Preço Mínimo</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-value">R$ ${data.estatisticas.maximo.toFixed(2)}</div>
+                                    <div class="stat-label">Preço Máximo</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-value">R$ ${data.estatisticas.media.toFixed(2)}</div>
+                                    <div class="stat-label">Preço Médio</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-value">R$ ${data.estatisticas.mediana.toFixed(2)}</div>
+                                    <div class="stat-label">Preço Mediana</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-value">R$ ${data.estatisticas.desvio_padrao.toFixed(2)}</div>
+                                    <div class="stat-label">Desvio Padrão</div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }
+                
+                // Produtos em tabela
+                html += `
+                    <table class="products-table">
+                        <thead>
+                            <tr>
+                                <th>Imagem</th>
+                                <th>Produto</th>
+                                <th>Preço</th>
+                                <th>Ação</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                `;
+                
+                data.produtos.forEach(produto => {
+                    const imagem = produto.imagem ? 
+                        `<img src="${produto.imagem}" alt="${produto.nome}" onerror="this.parentElement.innerHTML='<div class=\\"no-image\\">📦</div>'">` :
+                        '<div class="no-image">📦</div>';
+                    
+                    const precoOriginal = produto.preco_original ? 
+                        `<span class="product-price-original">R$ ${produto.preco_original.toFixed(2)}</span>` : '';
+                    
+                    const loja = produto.loja && produto.loja !== "Vendedor não identificado" ? 
+                        `<div class="product-store">🏪 ${produto.loja}</div>` : '';
+                    
+                    let link_text = 'Ver no ML';
+                    if (fonte_nome.includes('BuscaPé')) {
+                        link_text = 'Ver no BuscaPé';
+                    } else if (fonte_nome.includes('Zoom')) {
+                        link_text = 'Ver no Zoom';
+                    }
+                    const link = produto.link ? 
+                        `<a href="${produto.link}" target="_blank" class="product-link">${link_text}</a>` :
+                        '<span class="product-link disabled">Link indisponível</span>';
+                    
+                    html += `
+                        <tr>
+                            <td class="product-image-cell">
+                                <div class="product-image">
+                                    ${imagem}
+                                </div>
+                            </td>
+                            <td class="product-name-cell">
+                                <div class="product-name">${produto.nome}</div>
+                                ${loja}
+                            </td>
+                            <td class="product-price-cell">
+                                <div class="product-price">R$ ${produto.preco.toFixed(2)}</div>
+                                ${precoOriginal}
+                            </td>
+                            <td class="product-link-cell">
+                                ${link}
+                            </td>
+                        </tr>
+                    `;
+                });
+                
+                html += `
+                        </tbody>
+                    </table>
+                `;
+                
+                resultsDiv.innerHTML = html;
+            }
+            
+            resultsDiv.style.display = 'block';
+        }
+    </script>
+</body>
+</html>
