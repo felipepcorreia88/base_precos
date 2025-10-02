@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{TITULO}}</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .header h1 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 2em;
+        }
+        
+        .header .info {
+            color: #666;
+            margin-bottom: 20px;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .stat-card .value {
+            font-size: 2em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .stat-card .label {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+        
+        .controls {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-right: 10px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-success {
+            background: linear-gradient(135deg, #56ab2f 0%, #a8e063 100%);
+        }
+        
+        .btn-danger {
+            background: linear-gradient(135deg, #eb3349 0%, #f45c43 100%);
+        }
+        
+        .search-box {
+            width: 100%;
+            padding: 12px 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1em;
+            margin-bottom: 15px;
+            transition: border-color 0.3s;
+        }
+        
+        .search-box:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .material-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .material-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+        
+        .material-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .material-title {
+            flex: 1;
+        }
+        
+        .material-title h3 {
+            color: #333;
+            margin-bottom: 8px;
+            font-size: 1.3em;
+        }
+        
+        .material-info {
+            color: #666;
+            font-size: 0.95em;
+        }
+        
+        .material-info span {
+            margin-right: 15px;
+        }
+        
+        .produtos-list {
+            margin-top: 15px;
+            display: none; /* Inicialmente escondido */
+            animation: slideDown 0.3s ease;
+        }
+        
+        .produtos-list.show {
+            display: block;
+        }
+        
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                max-height: 0;
+            }
+            to {
+                opacity: 1;
+                max-height: 5000px;
+            }
+        }
+        
+        .btn-toggle {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.95em;
+            font-weight: 600;
+            transition: all 0.3s;
+            margin-left: 10px;
+        }
+        
+        .btn-toggle:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-toggle .icon {
+            margin-left: 5px;
+            transition: transform 0.3s;
+        }
+        
+        .btn-toggle.expanded .icon {
+            transform: rotate(180deg);
+        }
+        
+        .produto-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.3s;
+        }
+        
+        .produto-item:hover {
+            background: #e9ecef;
+        }
+        
+        .produto-info {
+            flex: 1;
+        }
+        
+        .produto-nome {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        
+        .produto-preco {
+            color: #28a745;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        
+        .produto-score {
+            background: #667eea;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin-right: 10px;
+        }
+        
+        .btn-remove {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: background 0.3s;
+        }
+        
+        .btn-remove:hover {
+            background: #c82333;
+        }
+        
+        .produto-link {
+            color: #667eea;
+            text-decoration: none;
+            font-size: 0.9em;
+            margin-top: 5px;
+            display: inline-block;
+        }
+        
+        .produto-link:hover {
+            text-decoration: underline;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin-right: 8px;
+        }
+        
+        .badge-success {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .badge-warning {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .badge-danger {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        .no-results {
+            text-align: center;
+            padding: 40px;
+            color: #999;
+            font-size: 1.1em;
+        }
+        
+        @media (max-width: 768px) {
+            .stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .material-header {
+                flex-direction: column;
+            }
+            
+            .produto-item {
+                flex-direction: column;
+                align-items: start;
+            }
+            
+            .btn-remove {
+                margin-top: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Cabeçalho -->
+        <div class="header">
+            <h1>{{TITULO}}</h1>
+            <div class="info">
+                <p>📅 Gerado em: {{DATA_GERACAO}}</p>
+                <p>📊 Total de materiais processados: <strong id="total-materiais">{{TOTAL_MATERIAIS}}</strong></p>
+            </div>
+            
+            <div class="stats">
+                <div class="stat-card">
+                    <div class="value" id="stat-materiais">0</div>
+                    <div class="label">Materiais</div>
+                </div>
+                <div class="stat-card">
+                    <div class="value" id="stat-produtos">0</div>
+                    <div class="label">Produtos</div>
+                </div>
+                <div class="stat-card">
+                    <div class="value" id="stat-preco-medio">R$ 0</div>
+                    <div class="label">Preço Médio</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Controles -->
+        <div class="controls">
+            <input type="text" 
+                   id="search-box" 
+                   class="search-box" 
+                   placeholder="🔍 Buscar material...">
+            
+            <button class="btn btn-success" onclick="exportarExcel()">
+                📊 Exportar para Excel
+            </button>
+            
+            <button class="btn btn-danger" onclick="limparRemovidos()">
+                🗑️ Limpar Removidos
+            </button>
+        </div>
+        
+        <!-- Lista de Materiais -->
+        <div id="materiais-container"></div>
+        
+        <div id="no-results" class="no-results" style="display: none;">
+            Nenhum material encontrado
+        </div>
+    </div>
+    
+    <script>
+        // DADOS EMBUTIDOS (serão substituídos pelo script Python)
+        const DADOS = {{DADOS_JSON}};
+        
+        // Gerar chave única para localStorage baseada nos dados
+        const STORAGE_KEY = 'produtosRemovidos_' + btoa(JSON.stringify(DADOS).substring(0, 100)).substring(0, 20);
+        
+        // Estado da aplicação - carrega do localStorage se existir
+        let produtosRemovidos = new Set();
+        
+        // Carregar produtos removidos do localStorage
+        function carregarRemovidos() {
+            try {
+                const saved = localStorage.getItem(STORAGE_KEY);
+                if (saved) {
+                    const array = JSON.parse(saved);
+                    produtosRemovidos = new Set(array);
+                    console.log('✅ Carregados', produtosRemovidos.size, 'produtos removidos do localStorage');
+                }
+            } catch (e) {
+                console.error('Erro ao carregar removidos:', e);
+            }
+        }
+        
+        // Salvar produtos removidos no localStorage
+        function salvarRemovidos() {
+            try {
+                const array = Array.from(produtosRemovidos);
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(array));
+                console.log('💾 Salvos', array.length, 'produtos removidos');
+            } catch (e) {
+                console.error('Erro ao salvar removidos:', e);
+            }
+        }
+        
+        // Inicialização
+        document.addEventListener('DOMContentLoaded', function() {
+            // Carregar produtos removidos salvos
+            carregarRemovidos();
+            
+            renderizarMateriais();
+            atualizarEstatisticas();
+            
+            // Configurar busca
+            document.getElementById('search-box').addEventListener('input', function(e) {
+                const termo = e.target.value.toLowerCase();
+                filtrarMateriais(termo);
+            });
+        });
+        
+        // Renderizar lista de materiais
+        function renderizarMateriais(filtro = '') {
+            const container = document.getElementById('materiais-container');
+            const noResults = document.getElementById('no-results');
+            container.innerHTML = '';
+            
+            let materiaisFiltrados = DADOS;
+            
+            if (filtro) {
+                materiaisFiltrados = DADOS.filter(m => 
+                    m.nome.toLowerCase().includes(filtro)
+                );
+            }
+            
+            if (materiaisFiltrados.length === 0) {
+                container.style.display = 'none';
+                noResults.style.display = 'block';
+                return;
+            }
+            
+            container.style.display = 'block';
+            noResults.style.display = 'none';
+            
+            materiaisFiltrados.forEach((material, idx) => {
+                const card = criarCardMaterial(material, idx);
+                container.appendChild(card);
+            });
+        }
+        
+        // Criar card de material
+        function criarCardMaterial(material, idx) {
+            const card = document.createElement('div');
+            card.className = 'material-card';
+            card.id = `material-${idx}`;
+            
+            const produtos = material.produtos || [];
+            const produtosVisiveis = produtos.filter(p => 
+                !produtosRemovidos.has(`${idx}-${p.nome}`)
+            );
+            
+            let statusBadge = '';
+            if (produtosVisiveis.length === 0) {
+                statusBadge = '<span class="badge badge-danger">Sem produtos</span>';
+            } else if (produtosVisiveis.length < 5) {
+                statusBadge = '<span class="badge badge-warning">Poucos produtos</span>';
+            } else {
+                statusBadge = '<span class="badge badge-success">Com produtos</span>';
+            }
+            
+            let produtosHTML = '';
+            if (produtosVisiveis.length > 0) {
+                produtosHTML = `<div class="produtos-list" id="produtos-${idx}">`;
+                produtosVisiveis.forEach((produto, produtoIdx) => {
+                    const produtoId = `${idx}-${produto.nome}`;
+                    const elementId = `produto-${produtoId.replace(/[^a-zA-Z0-9]/g, '_')}`;
+                    produtosHTML += `
+                        <div class="produto-item" id="${elementId}" data-material-idx="${idx}" data-produto-idx="${produtoIdx}">
+                            <div class="produto-info">
+                                <span class="produto-score">Score: ${produto.score_relevancia?.toFixed(2) || 'N/A'}</span>
+                                <div class="produto-nome">${produto.nome}</div>
+                                <div class="produto-preco">R$ ${produto.preco?.toFixed(2) || 'N/A'}</div>
+                                ${produto.link ? `<a href="${produto.link}" target="_blank" class="produto-link">Ver no Mercado Livre →</a>` : ''}
+                            </div>
+                            <button class="btn-remove" onclick="event.stopPropagation(); removerProdutoPorIndice(${idx}, ${produtoIdx})">
+                                ✕ Remover
+                            </button>
+                        </div>
+                    `;
+                });
+                produtosHTML += '</div>';
+            }
+            
+            card.innerHTML = `
+                <div class="material-header">
+                    <div class="material-title">
+                        <h3>${material.nome}</h3>
+                        <div class="material-info">
+                            ${statusBadge}
+                            <span>📦 <strong>${produtosVisiveis.length}</strong> produto(s)</span>
+                            ${produtosVisiveis.length > 0 ? (() => {
+                                const precos = produtosVisiveis.map(p => p.preco).filter(p => p);
+                                if (precos.length === 0) return '';
+                                const stats = calcularEstatisticas(precos);
+                                return `
+                                    <span>📊 Min: <strong>R$ ${stats.minimo.toFixed(2)}</strong></span>
+                                    <span>📊 Máx: <strong>R$ ${stats.maximo.toFixed(2)}</strong></span>
+                                    <span>📊 Média: <strong>R$ ${stats.media.toFixed(2)}</strong></span>
+                                    <span>📊 Mediana: <strong>R$ ${stats.mediana.toFixed(2)}</strong></span>
+                                    <span>📊 DP: <strong>R$ ${stats.desvioPadrao.toFixed(2)}</strong></span>
+                                `;
+                            })() : ''}
+                        </div>
+                    </div>
+                    ${produtosVisiveis.length > 0 ? `
+                        <button class="btn-toggle" onclick="toggleProdutos(${idx})" id="btn-toggle-${idx}">
+                            <span>Mostrar Produtos</span>
+                            <span class="icon">▼</span>
+                        </button>
+                    ` : ''}
+                </div>
+                ${produtosHTML}
+            `;
+            
+            return card;
+        }
+        
+        // Expandir/Colapsar produtos
+        function toggleProdutos(idx) {
+            const produtosList = document.getElementById(`produtos-${idx}`);
+            const btn = document.getElementById(`btn-toggle-${idx}`);
+            
+            if (!produtosList || !btn) return;
+            
+            if (produtosList.classList.contains('show')) {
+                // Esconder
+                produtosList.classList.remove('show');
+                btn.innerHTML = '<span>Mostrar Produtos</span><span class="icon">▼</span>';
+                btn.classList.remove('expanded');
+            } else {
+                // Mostrar
+                produtosList.classList.add('show');
+                btn.innerHTML = '<span>Esconder Produtos</span><span class="icon">▲</span>';
+                btn.classList.add('expanded');
+            }
+        }
+        
+        // Remover produto por índice (mais seguro que por nome)
+        function removerProdutoPorIndice(materialIdx, produtoIdx) {
+            const material = DADOS[materialIdx];
+            if (!material || !material.produtos) return;
+            
+            const produtos = material.produtos || [];
+            const produtosVisiveis = produtos.filter(p => 
+                !produtosRemovidos.has(`${materialIdx}-${p.nome}`)
+            );
+            
+            if (produtoIdx >= produtosVisiveis.length) return;
+            
+            const produto = produtosVisiveis[produtoIdx];
+            const nomeProduto = produto.nome;
+            const chave = `${materialIdx}-${nomeProduto}`;
+            
+            // Adicionar aos removidos
+            produtosRemovidos.add(chave);
+            
+            // Salvar no localStorage
+            salvarRemovidos();
+            
+            // Buscar elemento pelo data-attribute (mais confiável)
+            const elementos = document.querySelectorAll(`[data-material-idx="${materialIdx}"][data-produto-idx="${produtoIdx}"]`);
+            const produtoElement = elementos[0];
+            
+            console.log('🗑️ Removendo:', {
+                materialIdx,
+                produtoIdx,
+                nomeProduto,
+                chave,
+                elementoEncontrado: !!produtoElement
+            });
+            
+            if (produtoElement) {
+                // Animação de fade out
+                produtoElement.style.transition = 'opacity 0.3s, transform 0.3s';
+                produtoElement.style.opacity = '0';
+                produtoElement.style.transform = 'translateX(-20px)';
+                
+                // Remover após animação
+                setTimeout(() => {
+                    produtoElement.remove();
+                    
+                    // Atualizar estatísticas do material e badge
+                    atualizarMaterialVisual(materialIdx);
+                    atualizarEstatisticas();
+                    
+                    console.log('✅ Produto removido com sucesso');
+                }, 300);
+            } else {
+                console.error('❌ Elemento não encontrado');
+                console.log('🔄 Forçando re-renderização...');
+                
+                // Salvar posição do scroll
+                const scrollPos = window.scrollY;
+                
+                // Força re-renderização
+                const filtro = document.getElementById('search-box').value.toLowerCase();
+                renderizarMateriais(filtro);
+                atualizarEstatisticas();
+                
+                // Restaurar scroll
+                setTimeout(() => {
+                    window.scrollTo(0, scrollPos);
+                }, 50);
+            }
+        }
+        
+        // Atualizar visual do material (estatísticas e badge)
+        function atualizarMaterialVisual(materialIdx) {
+            const material = DADOS[materialIdx];
+            if (!material) return;
+            
+            const produtos = material.produtos || [];
+            const produtosVisiveis = produtos.filter(p => 
+                !produtosRemovidos.has(`${materialIdx}-${p.nome}`)
+            );
+            
+            // Atualizar badge e contador
+            const materialCard = document.getElementById(`material-${materialIdx}`);
+            if (!materialCard) return;
+            
+            const materialInfo = materialCard.querySelector('.material-info');
+            if (!materialInfo) return;
+            
+            // Atualizar badge
+            let statusBadge = '';
+            if (produtosVisiveis.length === 0) {
+                statusBadge = '<span class="badge badge-danger">Sem produtos</span>';
+            } else if (produtosVisiveis.length < 5) {
+                statusBadge = '<span class="badge badge-warning">Poucos produtos</span>';
+            } else {
+                statusBadge = '<span class="badge badge-success">Com produtos</span>';
+            }
+            
+            // Calcular novas estatísticas
+            let statsHTML = '';
+            if (produtosVisiveis.length > 0) {
+                const precos = produtosVisiveis.map(p => p.preco).filter(p => p);
+                if (precos.length > 0) {
+                    const stats = calcularEstatisticas(precos);
+                    statsHTML = `
+                        <span>📊 Min: <strong>R$ ${stats.minimo.toFixed(2)}</strong></span>
+                        <span>📊 Máx: <strong>R$ ${stats.maximo.toFixed(2)}</strong></span>
+                        <span>📊 Média: <strong>R$ ${stats.media.toFixed(2)}</strong></span>
+                        <span>📊 Mediana: <strong>R$ ${stats.mediana.toFixed(2)}</strong></span>
+                        <span>📊 DP: <strong>R$ ${stats.desvioPadrao.toFixed(2)}</strong></span>
+                    `;
+                }
+            }
+            
+            // Atualizar o HTML
+            materialInfo.innerHTML = `
+                ${statusBadge}
+                <span>📦 <strong>${produtosVisiveis.length}</strong> produto(s)</span>
+                ${statsHTML}
+            `;
+        }
+        
+        // Limpar produtos removidos
+        function limparRemovidos() {
+            if (produtosRemovidos.size === 0) {
+                alert('Nenhum produto foi removido!');
+                return;
+            }
+            
+            if (confirm(`Restaurar ${produtosRemovidos.size} produto(s) removido(s)?`)) {
+                // Salvar posição do scroll
+                const scrollPos = window.scrollY;
+                
+                produtosRemovidos.clear();
+                
+                // Limpar do localStorage
+                localStorage.removeItem(STORAGE_KEY);
+                console.log('🗑️ localStorage limpo');
+                
+                const filtro = document.getElementById('search-box').value.toLowerCase();
+                renderizarMateriais(filtro);
+                atualizarEstatisticas();
+                
+                // Restaurar posição do scroll após um pequeno delay
+                setTimeout(() => {
+                    window.scrollTo(0, scrollPos);
+                }, 50);
+            }
+        }
+        
+        // Filtrar materiais
+        function filtrarMateriais(termo) {
+            renderizarMateriais(termo);
+            atualizarEstatisticas(termo);
+        }
+        
+        // Atualizar estatísticas
+        function atualizarEstatisticas(filtro = '') {
+            let materiaisFiltrados = DADOS;
+            
+            if (filtro) {
+                materiaisFiltrados = DADOS.filter(m => 
+                    m.nome.toLowerCase().includes(filtro)
+                );
+            }
+            
+            let totalProdutos = 0;
+            let somaPrecos = 0;
+            let countPrecos = 0;
+            
+            materiaisFiltrados.forEach((material, idx) => {
+                const produtos = material.produtos || [];
+                const produtosVisiveis = produtos.filter(p => 
+                    !produtosRemovidos.has(`${idx}-${p.nome}`)
+                );
+                
+                totalProdutos += produtosVisiveis.length;
+                
+                produtosVisiveis.forEach(p => {
+                    if (p.preco) {
+                        somaPrecos += p.preco;
+                        countPrecos++;
+                    }
+                });
+            });
+            
+            const precoMedio = countPrecos > 0 ? somaPrecos / countPrecos : 0;
+            
+            document.getElementById('stat-materiais').textContent = materiaisFiltrados.length;
+            document.getElementById('stat-produtos').textContent = totalProdutos;
+            document.getElementById('stat-preco-medio').textContent = `R$ ${precoMedio.toFixed(2)}`;
+        }
+        
+        // Calcular estatísticas de preços
+        function calcularEstatisticas(precos) {
+            if (precos.length === 0) return null;
+            
+            const sorted = [...precos].sort((a, b) => a - b);
+            const n = sorted.length;
+            
+            // Média
+            const media = precos.reduce((a, b) => a + b, 0) / n;
+            
+            // Mediana
+            const mediana = n % 2 === 0 
+                ? (sorted[n/2 - 1] + sorted[n/2]) / 2 
+                : sorted[Math.floor(n/2)];
+            
+            // Moda (pode ter múltiplas modas)
+            const frequencia = {};
+            precos.forEach(p => frequencia[p] = (frequencia[p] || 0) + 1);
+            const maxFreq = Math.max(...Object.values(frequencia));
+            const moda = Object.keys(frequencia)
+                .filter(k => frequencia[k] === maxFreq)
+                .map(Number)[0]; // Pega primeira moda
+            
+            // Desvio padrão
+            const variancia = precos.reduce((acc, p) => acc + Math.pow(p - media, 2), 0) / n;
+            const desvioPadrao = Math.sqrt(variancia);
+            
+            // Mínimo e máximo
+            const minimo = sorted[0];
+            const maximo = sorted[n - 1];
+            
+            return {
+                media,
+                mediana,
+                moda,
+                desvioPadrao,
+                minimo,
+                maximo,
+                quantidade: n
+            };
+        }
+        
+        // Exportar para Excel
+        function exportarExcel() {
+            const dados = [];
+            
+            DADOS.forEach((material, idx) => {
+                const produtos = material.produtos || [];
+                const produtosVisiveis = produtos.filter(p => 
+                    !produtosRemovidos.has(`${idx}-${p.nome}`)
+                );
+                
+                // Calcular estatísticas
+                const precos = produtosVisiveis
+                    .map(p => p.preco)
+                    .filter(p => p != null && p > 0);
+                
+                const stats = calcularEstatisticas(precos);
+                
+                // Preparar produtos em JSON
+                const produtosJSON = JSON.stringify(produtosVisiveis.map(p => ({
+                    nome: p.nome,
+                    preco: p.preco,
+                    score: p.score_relevancia,
+                    link: p.link
+                })));
+                
+                // UM MATERIAL POR LINHA
+                dados.push({
+                    'Material': material.nome,
+                    'Quantidade_Produtos': produtosVisiveis.length,
+                    'Preco_Minimo': stats ? stats.minimo : null,
+                    'Preco_Maximo': stats ? stats.maximo : null,
+                    'Preco_Medio': stats ? stats.media : null,
+                    'Preco_Mediana': stats ? stats.mediana : null,
+                    'Preco_Moda': stats ? stats.moda : null,
+                    'Desvio_Padrao': stats ? stats.desvioPadrao : null,
+                    'Produtos_JSON': produtosJSON
+                });
+            });
+            
+            // Criar workbook
+            const ws = XLSX.utils.json_to_sheet(dados);
+            const wb = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(wb, ws, "Materiais");
+            
+            // Ajustar largura das colunas
+            const colWidths = [
+                { wch: 40 },  // Material
+                { wch: 12 },  // Quantidade
+                { wch: 12 },  // Mínimo
+                { wch: 12 },  // Máximo
+                { wch: 12 },  // Médio
+                { wch: 12 },  // Mediana
+                { wch: 12 },  // Moda
+                { wch: 12 },  // Desvio
+                { wch: 100 }  // JSON
+            ];
+            ws['!cols'] = colWidths;
+            
+            // Baixar
+            const filename = `{{TITULO}}_${new Date().toISOString().split('T')[0]}.xlsx`;
+            XLSX.writeFile(wb, filename);
+            
+            alert(`✅ Excel exportado: ${filename}\n\n📊 Formato: 1 material por linha\n📈 Estatísticas: Média, Mediana, Moda, Desvio Padrão\n🔗 Produtos: JSON na última coluna`);
+        }
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,236 @@
+================================================================================
+🎯 teste_otimizacao.py - ATUALIZADO COM SALVAR RESULTADOS!
+================================================================================
+
+✅ NOVOS RECURSOS:
+   1. Processar N linhas da planilha
+   2. SALVAR resultados em Excel 📊
+
+================================================================================
+📋 PARÂMETROS DISPONÍVEIS
+================================================================================
+
+--linhas, -n NÚMERO
+   Número de linhas da planilha para processar
+
+--planilha, -p ARQUIVO
+   Arquivo da planilha (padrão: materiais.xlsx)
+
+--min-score, -s VALOR
+   Score mínimo de relevância 0.0-1.0 (padrão: 0.3)
+
+--buscar, -b
+   Fazer busca REAL no Mercado Livre
+
+--salvar, --saida, -o ARQUIVO.xlsx  ⭐ NOVO!
+   Salvar resultados em planilha Excel
+
+================================================================================
+📊 COLUNAS DA PLANILHA SALVA
+================================================================================
+
+✅ Nome_Original              - Termo original da planilha
+✅ Termo_Otimizado           - Termo otimizado para busca
+✅ Palavras_Chave            - Palavras-chave extraídas
+✅ Total_Produtos_Encontrados - Produtos brutos (antes do filtro)
+✅ Total_Produtos_Relevantes  - Produtos relevantes (após filtro)
+✅ Preco_Minimo              - Menor preço encontrado
+✅ Preco_Maximo              - Maior preço encontrado
+✅ Preco_Medio               - Preço médio
+✅ Preco_Mediana             - Preço mediano
+✅ Desvio_Padrao             - Desvio padrão dos preços
+✅ Outliers_Removidos        - Quantidade de outliers removidos
+✅ Links_Produtos_JSON       - JSON com todos os produtos e links
+✅ Status_Busca              - Status: sucesso, erro, apenas_otimizacao
+✅ Data_Hora_Busca           - Data e hora do processamento
+
+================================================================================
+🚀 EXEMPLOS PRÁTICOS
+================================================================================
+
+1. TESTE VISUAL (sem planilha):
+   python3 teste_otimizacao.py
+
+2. SALVAR APENAS OTIMIZAÇÕES (rápido):
+   python3 teste_otimizacao.py --linhas 10 --salvar otimizacoes.xlsx
+
+3. SALVAR COM BUSCA REAL (3 materiais):
+   python3 teste_otimizacao.py --linhas 3 --buscar --salvar resultados.xlsx
+
+4. SALVAR 20 MATERIAIS COM SCORE 0.4:
+   python3 teste_otimizacao.py --linhas 20 --min-score 0.4 --buscar --salvar resultado.xlsx
+
+5. ATALHO COMPLETO:
+   python3 teste_otimizacao.py -n 10 -b -s 0.3 -o resultado.xlsx
+
+6. ARQUIVO CUSTOMIZADO:
+   python3 teste_otimizacao.py -p minha.xlsx -n 5 -b -o saida.xlsx
+
+================================================================================
+💡 DIFERENÇA ENTRE OS MODOS
+================================================================================
+
+SEM --buscar (APENAS OTIMIZAÇÃO):
+   ✅ Instantâneo
+   ✅ Mostra como termos são otimizados
+   ✅ Preços ficam vazios na planilha
+   ✅ Útil para planejamento
+
+   PLANILHA GERADA:
+   Nome_Original: ATIVIDADES... - Kit Bolas
+   Termo_Otimizado: kit bolas
+   Palavras_Chave: kit, bolas
+   Total_Produtos_Encontrados: (vazio)
+   Total_Produtos_Relevantes: (vazio)
+   Precos: (vazios)
+   Status_Busca: apenas_otimizacao
+
+COM --buscar (BUSCA REAL):
+   ✅ Busca no Mercado Livre
+   ✅ Produtos, preços, estatísticas
+   ✅ Links de todos os produtos
+   ✅ ~3 segundos por material
+
+   PLANILHA GERADA:
+   Nome_Original: ATIVIDADES... - Kit Bolas
+   Termo_Otimizado: kit bolas suíças
+   Palavras_Chave: kit, bolas, suíças
+   Total_Produtos_Encontrados: 25
+   Total_Produtos_Relevantes: 8
+   Preco_Minimo: 89.90
+   Preco_Maximo: 299.90
+   Preco_Medio: 149.50
+   Links_Produtos_JSON: [{"nome": "...", "preco": 89.90, ...}]
+   Status_Busca: sucesso
+
+================================================================================
+⏱️ TEMPO ESTIMADO
+================================================================================
+
+10 linhas SEM buscar + salvar  →  Instantâneo
+5 linhas COM buscar + salvar   →  ~15 segundos
+10 linhas COM buscar + salvar  →  ~30 segundos
+20 linhas COM buscar + salvar  →  ~1 minuto
+50 linhas COM buscar + salvar  →  ~2.5 minutos
+
+================================================================================
+🎯 FLUXO RECOMENDADO DE USO
+================================================================================
+
+PASSO 1: Teste otimização rápida (10 materiais)
+   python3 teste_otimizacao.py -n 10 -o teste_otimizacao.xlsx
+   
+   → Veja como termos são otimizados
+   → Identifique materiais problemáticos
+   → Instantâneo!
+
+PASSO 2: Valide com busca real (3 materiais)
+   python3 teste_otimizacao.py -n 3 -b -o teste_busca.xlsx
+   
+   → Veja produtos reais encontrados
+   → Verifique relevância
+   → ~10 segundos
+
+PASSO 3: Ajuste score se necessário
+   python3 teste_otimizacao.py -n 5 -b -s 0.4 -o teste_score.xlsx
+   
+   → Se muitos irrelevantes: aumente score
+   → Se poucos produtos: diminua score
+
+PASSO 4: Processe mais materiais
+   python3 teste_otimizacao.py -n 50 -b -o resultados_50.xlsx
+   
+   → ~2.5 minutos
+   → Dados completos
+
+PASSO 5: Para processar TUDO (3306 materiais)
+   python3 busca_materiais_planilha_otimizado.py
+   
+   → ~3-4 horas
+   → Planilha completa
+
+================================================================================
+📊 CASOS DE USO
+================================================================================
+
+CASO 1: Planejar busca (ver otimizações)
+   python3 teste_otimizacao.py -n 20 -o planejamento.xlsx
+   → Instantâneo, veja otimizações
+
+CASO 2: Validar resultados (poucos materiais)
+   python3 teste_otimizacao.py -n 5 -b -o validacao.xlsx
+   → ~15s, veja se produtos são relevantes
+
+CASO 3: Testar diferentes scores
+   python3 teste_otimizacao.py -n 5 -b -s 0.2 -o score_02.xlsx
+   python3 teste_otimizacao.py -n 5 -b -s 0.4 -o score_04.xlsx
+   python3 teste_otimizacao.py -n 5 -b -s 0.5 -o score_05.xlsx
+   → Compare resultados
+
+CASO 4: Processar lote médio
+   python3 teste_otimizacao.py -n 100 -b -o lote_100.xlsx
+   → ~5 minutos, bom dataset
+
+CASO 5: Apenas conferir termos
+   python3 teste_otimizacao.py -n 50 -o apenas_termos.xlsx
+   → Instantâneo, planeje depois
+
+================================================================================
+⚙️ AJUSTE DE SCORE
+================================================================================
+
+--min-score 0.2  →  Menos rigoroso (mais produtos)
+--min-score 0.3  →  Padrão (equilíbrio) ⭐ RECOMENDADO
+--min-score 0.4  →  Rigoroso (menos produtos, mais relevantes)
+--min-score 0.5  →  Muito rigoroso (apenas os melhores)
+
+COMO DECIDIR:
+1. Comece com 0.3
+2. Se muitos irrelevantes → Aumente (0.4 ou 0.5)
+3. Se poucos produtos → Diminua (0.2)
+
+================================================================================
+📚 ARQUIVOS DO SISTEMA
+================================================================================
+
+teste_otimizacao.py                    - Teste com N linhas + salvar
+busca_materiais_planilha_otimizado.py  - Processar planilha completa
+README_OTIMIZACAO.md                   - Documentação completa
+RESUMO_OTIMIZACAO.txt                  - Resumo do sistema otimizado
+
+================================================================================
+✅ COMANDOS QUICK START
+================================================================================
+
+# Ver ajuda completa
+python3 teste_otimizacao.py --help
+
+# Teste visual (sem planilha)
+python3 teste_otimizacao.py
+
+# Salvar 10 otimizações (rápido)
+python3 teste_otimizacao.py -n 10 -o teste.xlsx
+
+# Salvar 3 com busca real
+python3 teste_otimizacao.py -n 3 -b -o teste_real.xlsx
+
+# Salvar 20 com score 0.4
+python3 teste_otimizacao.py -n 20 -b -s 0.4 -o resultado.xlsx
+
+================================================================================
+🎉 TESTE AGORA!
+================================================================================
+
+Comece com:
+
+  # Rápido (ver otimizações)
+  python3 teste_otimizacao.py -n 10 -o meu_teste.xlsx
+
+Depois:
+
+  # Com busca real (validar)
+  python3 teste_otimizacao.py -n 3 -b -o validacao.xlsx
+
+Abra os arquivos .xlsx gerados e analise os resultados! 📊
+
+================================================================================

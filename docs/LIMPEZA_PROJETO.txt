@@ -1,0 +1,137 @@
+╔══════════════════════════════════════════════════════════════════════╗
+║                                                                      ║
+║            ✅ PROJETO LIMPO E ORGANIZADO                            ║
+║                                                                      ║
+╚══════════════════════════════════════════════════════════════════════╝
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🗑️  ARQUIVOS REMOVIDOS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Da Raiz:
+  ❌ oauth_ml_completo.py          (não estava sendo usado)
+  ❌ configurar_api_ml.py           (não estava sendo usado)
+  ❌ testar_api_publica.py          (não estava sendo usado)
+  ❌ processar_api.sh               (não estava sendo usado)
+
+Do Diretório scripts/:
+  ❌ processar_parte_api.py         (não estava sendo usado)
+  ❌ gerar_paginas_estaticas_api.py (não estava sendo usado)
+
+Do Diretório scripts/core/:
+  ❌ busca_materiais_api_ml.py      (não estava sendo usado)
+
+Cache Python:
+  ❌ __pycache__/                   (cache compilado)
+  ❌ *.pyc                           (arquivos compilados)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📁 ARQUIVOS MOVIDOS PARA docs/
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ✅ ALTERACOES_DIVISAO.txt  → docs/ALTERACOES_DIVISAO.txt
+  ✅ FILTRO_FLEXIVEL.txt      → docs/FILTRO_FLEXIVEL.txt
+  ✅ REORGANIZADO.txt         → docs/REORGANIZADO.txt
+  ✅ RECOMENDACAO.txt         → docs/RECOMENDACAO.txt
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📂 ESTRUTURA FINAL (LIMPA)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+busca_precos/
+│
+├── 📄 RAIZ (Apenas arquivos essenciais)
+│   ├── README.md                    ✅ Documentação principal
+│   ├── materiais.xlsx               ✅ Planilha de entrada
+│   ├── requirements.txt             ✅ Dependências
+│   ├── .gitignore                   ✅ Git ignore
+│   ├── dividir.sh                   ✅ Script facilitador
+│   ├── processar.sh                 ✅ Script facilitador
+│   └── gerar_indice.sh              ✅ Script facilitador
+│
+├── 📂 scripts/                      (Scripts Python)
+│   ├── dividir_planilha.py          ✅ Divisão de planilhas
+│   ├── processar_parte.py           ✅ Processamento
+│   ├── gerar_indice.py              ✅ Geração de índice
+│   ├── gerar_paginas_estaticas.py   ✅ Geração de HTML
+│   ├── testar_paginas_estaticas.py  ✅ Testes
+│   └── core/
+│       └── busca_materiais_planilha_inteligente.py  ✅ Motor principal
+│
+├── 📂 docs/                         (Toda documentação)
+│   ├── LEIA_PRIMEIRO.txt            ✅ Início
+│   ├── FILTRO_FLEXIVEL.txt          ✅ Explicação do filtro
+│   ├── ALTERACOES_DIVISAO.txt       ✅ Divisão configurável
+│   ├── REORGANIZADO.txt             ✅ Histórico
+│   ├── RECOMENDACAO.txt             ✅ Recomendações
+│   ├── GUIA_DIVISAO.md              ✅ Guia completo
+│   ├── EXEMPLOS_DIVISAO.txt         ✅ Exemplos
+│   └── ... (outros docs)
+│
+├── 📂 templates/                    (Templates HTML)
+│   ├── pagina_estatica.html         ✅ Template principal
+│   ├── visualizador.html            ✅ Visualizador
+│   └── index.html                   ✅ Índice
+│
+├── 📂 output/                       (Arquivos gerados)
+│   ├── partes/                      (Planilhas divididas)
+│   ├── paginas_html/                (Páginas HTML geradas)
+│   └── logs/                        (Logs de execução)
+│
+└── 📂 backup_antigo/                (Backup de versões antigas)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+✅ BENEFÍCIOS DA LIMPEZA
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ Raiz limpa - Apenas 6 arquivos essenciais
+✅ Sem código de API não utilizado
+✅ Documentação organizada em docs/
+✅ Estrutura clara e fácil de entender
+✅ Mais fácil de manter e atualizar
+✅ Menor confusão para novos usuários
+✅ Sem arquivos de cache
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🚀 COMO USAR (Não Mudou!)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. Dividir planilha:
+   ./dividir.sh -n 10
+
+2. Processar partes:
+   ./processar.sh -p 1
+   ./processar.sh -p 2
+   # ... etc
+
+3. Gerar índice:
+   ./gerar_indice.sh
+
+4. Visualizar:
+   xdg-open output/paginas_html/index.html
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📝 OBSERVAÇÕES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+• API do Mercado Livre não estava funcionando no ambiente
+• Todos os scripts de API foram removidos
+• Sistema usa apenas scraping (mais lento, mas funciona)
+• Filtro modificado para ser FLEXÍVEL (não mais restritivo)
+• README atualizado para refletir as mudanças
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📚 DOCUMENTAÇÃO PRINCIPAL
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+• README.md (raiz)              → Visão geral e início rápido
+• docs/LEIA_PRIMEIRO.txt        → Comece aqui
+• docs/FILTRO_FLEXIVEL.txt      → Entenda o filtro flexível
+• docs/GUIA_DIVISAO.md          → Como dividir planilhas
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ Projeto limpo, organizado e pronto para uso!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+

@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📊 Visualizador de Materiais - Preços</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .header .arquivo-info {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px 20px;
+            border-radius: 8px;
+            margin-top: 15px;
+            display: inline-block;
+            backdrop-filter: blur(10px);
+        }
+
+        .stats-section {
+            padding: 30px;
+            background: #f8f9fa;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .stat-card .value {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .stat-card .label {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+
+        .controls-section {
+            padding: 20px 30px;
+            background: white;
+            border-bottom: 1px solid #e9ecef;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: #4facfe;
+            box-shadow: 0 0 0 3px rgba(79, 172, 254, 0.1);
+        }
+
+        .sort-box {
+            display: flex;
+            gap: 10px;
+        }
+
+        .sort-box select {
+            padding: 12px 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            background: white;
+        }
+
+        .materials-section {
+            padding: 30px;
+            max-height: 800px;
+            overflow-y: auto;
+        }
+
+        .material-card {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .material-card:hover {
+            border-color: #4facfe;
+            box-shadow: 0 5px 15px rgba(79, 172, 254, 0.2);
+        }
+
+        .material-header {
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #f8f9fa;
+            transition: background 0.3s ease;
+        }
+
+        .material-header:hover {
+            background: #e9ecef;
+        }
+
+        .material-info {
+            flex: 1;
+        }
+
+        .material-name {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #212529;
+            margin-bottom: 8px;
+        }
+
+        .material-stats {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            font-size: 0.9em;
+            color: #6c757d;
+        }
+
+        .material-stat {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .material-stat .icon {
+            font-size: 1.2em;
+        }
+
+        .material-toggle {
+            font-size: 1.5em;
+            color: #4facfe;
+            transition: transform 0.3s ease;
+        }
+
+        .material-card.expanded .material-toggle {
+            transform: rotate(180deg);
+        }
+
+        .material-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .material-card.expanded .material-body {
+            max-height: 2000px;
+        }
+
+        .material-details {
+            padding: 20px;
+            background: white;
+            border-top: 2px solid #e9ecef;
+        }
+
+        .price-summary {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid #2196f3;
+        }
+
+        .price-summary h3 {
+            color: #1976d2;
+            margin-bottom: 10px;
+        }
+
+        .price-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+        }
+
+        .price-item {
+            background: white;
+            padding: 10px;
+            border-radius: 6px;
+        }
+
+        .price-item .label {
+            font-size: 0.85em;
+            color: #6c757d;
+            margin-bottom: 5px;
+        }
+
+        .price-item .value {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #28a745;
+        }
+
+        .products-list {
+            margin-top: 20px;
+        }
+
+        .products-list h3 {
+            margin-bottom: 15px;
+            color: #212529;
+        }
+
+        .product-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            transition: background 0.3s ease;
+        }
+
+        .product-item:hover {
+            background: #e9ecef;
+        }
+
+        .product-info {
+            flex: 1;
+        }
+
+        .product-name {
+            font-weight: 600;
+            color: #212529;
+            margin-bottom: 5px;
+        }
+
+        .product-price {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #28a745;
+        }
+
+        .product-link {
+            background: #4facfe;
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            transition: background 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .product-link:hover {
+            background: #3d8bfe;
+            color: white;
+            text-decoration: none;
+        }
+
+        .no-products {
+            text-align: center;
+            padding: 40px;
+            color: #6c757d;
+        }
+
+        .no-products .icon {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 60px 20px;
+            color: #6c757d;
+        }
+
+        .loading .spinner {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #4facfe;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+
+        .status-badge.sucesso {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-badge.erro {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .status-badge.sem-produtos {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .controls-section {
+                flex-direction: column;
+            }
+
+            .search-box,
+            .sort-box {
+                width: 100%;
+            }
+
+            .material-stats {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .product-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .product-link {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📊 Visualizador de Materiais</h1>
+            <p>Análise completa de preços coletados</p>
+            <div class="arquivo-info">
+                📁 <strong>Arquivo:</strong> {{ nome_arquivo }}
+            </div>
+        </div>
+
+        <div class="stats-section">
+            <div class="stats-grid" id="statsGrid">
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <p>Carregando estatísticas...</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="controls-section">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="🔍 Buscar material por nome...">
+            </div>
+            <div class="sort-box">
+                <select id="sortBy">
+                    <option value="Nome">Nome</option>
+                    <option value="Total_Produtos_Encontrados">Produtos</option>
+                    <option value="Preco_Medio">Preço Médio</option>
+                    <option value="Preco_Minimo">Preço Mínimo</option>
+                </select>
+                <select id="sortOrder">
+                    <option value="asc">Crescente</option>
+                    <option value="desc">Decrescente</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="materials-section" id="materialsSection">
+            <div class="loading">
+                <div class="spinner"></div>
+                <p>Carregando materiais...</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let materiaisData = [];
+        let filtroAtual = '';
+        let ordenarPor = 'Nome';
+        let ordem = 'asc';
+
+        // Carrega estatísticas
+        async function carregarEstatisticas() {
+            try {
+                const response = await fetch('/api/resumo');
+                const data = await response.json();
+                
+                const statsGrid = document.getElementById('statsGrid');
+                statsGrid.innerHTML = `
+                    <div class="stat-card">
+                        <div class="value">${data.total_materiais}</div>
+                        <div class="label">Total de Materiais</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="value">${data.materiais_com_produtos}</div>
+                        <div class="label">Com Produtos</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="value">${data.materiais_sem_produtos}</div>
+                        <div class="label">Sem Produtos</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="value">${data.total_produtos_encontrados}</div>
+                        <div class="label">Total de Produtos</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="value">R$ ${data.preco_medio_geral.toFixed(2)}</div>
+                        <div class="label">Preço Médio Geral</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="value">R$ ${data.preco_minimo_geral.toFixed(2)}</div>
+                        <div class="label">Preço Mínimo</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="value">R$ ${data.preco_maximo_geral.toFixed(2)}</div>
+                        <div class="label">Preço Máximo</div>
+                    </div>
+                `;
+            } catch (error) {
+                console.error('Erro ao carregar estatísticas:', error);
+            }
+        }
+
+        // Carrega materiais
+        async function carregarMateriais() {
+            try {
+                const params = new URLSearchParams({
+                    filtro: filtroAtual,
+                    ordenar_por: ordenarPor,
+                    ordem: ordem
+                });
+
+                const response = await fetch(`/api/materiais?${params}`);
+                const data = await response.json();
+                
+                materiaisData = data.materiais;
+                renderizarMateriais();
+            } catch (error) {
+                console.error('Erro ao carregar materiais:', error);
+                document.getElementById('materialsSection').innerHTML = `
+                    <div class="no-products">
+                        <div class="icon">❌</div>
+                        <h3>Erro ao carregar materiais</h3>
+                        <p>${error.message}</p>
+                    </div>
+                `;
+            }
+        }
+
+        // Renderiza lista de materiais
+        function renderizarMateriais() {
+            const section = document.getElementById('materialsSection');
+            
+            if (materiaisData.length === 0) {
+                section.innerHTML = `
+                    <div class="no-products">
+                        <div class="icon">🔍</div>
+                        <h3>Nenhum material encontrado</h3>
+                        <p>Tente ajustar os filtros de busca</p>
+                    </div>
+                `;
+                return;
+            }
+
+            let html = '';
+            materiaisData.forEach((material, index) => {
+                const statusClass = material.status === 'sucesso' ? 'sucesso' : 
+                                   material.status.includes('erro') ? 'erro' : 'sem-produtos';
+                
+                html += `
+                    <div class="material-card" id="material-${index}">
+                        <div class="material-header" onclick="toggleMaterial(${index})">
+                            <div class="material-info">
+                                <div class="material-name">${material.nome}</div>
+                                <div class="material-stats">
+                                    <div class="material-stat">
+                                        <span class="icon">📦</span>
+                                        <span>${material.total_produtos} produtos</span>
+                                    </div>
+                                    ${material.preco_medio ? `
+                                        <div class="material-stat">
+                                            <span class="icon">💰</span>
+                                            <span>Média: R$ ${material.preco_medio.toFixed(2)}</span>
+                                        </div>
+                                    ` : ''}
+                                    <div class="material-stat">
+                                        <span class="status-badge ${statusClass}">${material.status}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="material-toggle">▼</div>
+                        </div>
+                        <div class="material-body">
+                            ${renderizarDetalhes(material)}
+                        </div>
+                    </div>
+                `;
+            });
+
+            section.innerHTML = html;
+        }
+
+        // Renderiza detalhes de um material
+        function renderizarDetalhes(material) {
+            let html = '<div class="material-details">';
+
+            // Resumo de preços
+            if (material.preco_medio) {
+                html += `
+                    <div class="price-summary">
+                        <h3>📊 Resumo de Preços</h3>
+                        <div class="price-grid">
+                            <div class="price-item">
+                                <div class="label">Preço Médio</div>
+                                <div class="value">R$ ${material.preco_medio.toFixed(2)}</div>
+                            </div>
+                            <div class="price-item">
+                                <div class="label">Preço Mediana</div>
+                                <div class="value">R$ ${material.preco_mediana.toFixed(2)}</div>
+                            </div>
+                            <div class="price-item">
+                                <div class="label">Preço Mínimo</div>
+                                <div class="value">R$ ${material.preco_minimo.toFixed(2)}</div>
+                            </div>
+                            <div class="price-item">
+                                <div class="label">Preço Máximo</div>
+                                <div class="value">R$ ${material.preco_maximo.toFixed(2)}</div>
+                            </div>
+                            <div class="price-item">
+                                <div class="label">Desvio Padrão</div>
+                                <div class="value">R$ ${material.desvio_padrao.toFixed(2)}</div>
+                            </div>
+                            <div class="price-item">
+                                <div class="label">Outliers Removidos</div>
+                                <div class="value">${material.outliers_removidos}</div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            // Lista de produtos
+            if (material.produtos_json && material.produtos_json.length > 0) {
+                html += `
+                    <div class="products-list">
+                        <h3>🛍️ Produtos Encontrados (${material.produtos_json.length})</h3>
+                `;
+
+                material.produtos_json.forEach(produto => {
+                    html += `
+                        <div class="product-item">
+                            <div class="product-info">
+                                <div class="product-name">${produto.nome}</div>
+                                <div class="product-price">R$ ${produto.preco.toFixed(2)}</div>
+                            </div>
+                            <a href="${produto.link}" target="_blank" class="product-link">
+                                Ver Produto →
+                            </a>
+                        </div>
+                    `;
+                });
+
+                html += '</div>';
+            } else {
+                html += `
+                    <div class="no-products">
+                        <div class="icon">📭</div>
+                        <h3>Nenhum produto encontrado</h3>
+                        <p>Status: ${material.status}</p>
+                    </div>
+                `;
+            }
+
+            html += '</div>';
+            return html;
+        }
+
+        // Toggle expandir/recolher material
+        function toggleMaterial(index) {
+            const card = document.getElementById(`material-${index}`);
+            card.classList.toggle('expanded');
+        }
+
+        // Event listeners
+        document.getElementById('searchInput').addEventListener('input', (e) => {
+            filtroAtual = e.target.value;
+            carregarMateriais();
+        });
+
+        document.getElementById('sortBy').addEventListener('change', (e) => {
+            ordenarPor = e.target.value;
+            carregarMateriais();
+        });
+
+        document.getElementById('sortOrder').addEventListener('change', (e) => {
+            ordem = e.target.value;
+            carregarMateriais();
+        });
+
+        // Inicialização
+        document.addEventListener('DOMContentLoaded', () => {
+            carregarEstatisticas();
+            carregarMateriais();
+        });
+    </script>
+</body>
+</html>
+

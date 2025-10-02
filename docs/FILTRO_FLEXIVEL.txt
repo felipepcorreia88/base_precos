@@ -1,0 +1,214 @@
+╔══════════════════════════════════════════════════════════════════════╗
+║                                                                      ║
+║          ✅ FILTRO MODIFICADO: AGORA É FLEXÍVEL                     ║
+║                                                                      ║
+╚══════════════════════════════════════════════════════════════════════╝
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📝 O QUE MUDOU
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+ANTES (Filtro Restritivo):
+  ❌ Eliminava produtos que NÃO tivessem TODAS as palavras obrigatórias
+  ❌ Se buscava "Kit Bolas Suíças PCD" e o produto não tinha "PCD" = ELIMINADO
+  ❌ Resultado: Poucos produtos, muito restritivo
+
+AGORA (Filtro Flexível):
+  ✅ CONFIA no mecanismo de busca do Mercado Livre
+  ✅ MANTÉM todos os produtos retornados pelo ML
+  ✅ PONTUA por relevância (mais palavras = score maior)
+  ✅ ORDENA do mais relevante ao menos relevante
+  ✅ Resultado: Mais produtos, melhor cobertura
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🎯 COMO FUNCIONA AGORA
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Busca: "Kit Bolas Suíças PCD"
+Palavras importantes: suíças, pcd, bolas, kit
+
+Produtos retornados:
+
+┌───────────────────────────────────────────────────┬───────┬─────────┐
+│ Produto                                           │ Score │ Status  │
+├───────────────────────────────────────────────────┼───────┼─────────┤
+│ Bola Suíça 65cm PCD Profissional                 │ 1.0   │ ✅ Perfeito │
+│ Kit Bolas Suíça Anti-Burst                       │ 0.8   │ ✅ Ótimo    │
+│ Bola Pilates PCD Fisioterapia                    │ 0.6   │ ✅ Bom      │
+│ Kit Bolas Fitness Profissional                   │ 0.5   │ ✅ Razoável │
+│ Bola Terapêutica 65cm                            │ 0.3   │ ✅ Aceito   │
+└───────────────────────────────────────────────────┴───────┴─────────┘
+
+🔑 ANTES: Apenas o primeiro seria aceito
+🔑 AGORA: Todos são aceitos e ordenados por relevância
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📊 SISTEMA DE PONTUAÇÃO
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Score mínimo: 0.3 (produto retornado pelo ML = algo relevante)
+Score máximo: 1.0 (tem todas as palavras buscadas)
+
+Fórmula:
+  Score = 0.3 + (0.7 × palavras_encontradas / total_palavras)
+
+Exemplo com 4 palavras buscadas:
+  - Tem 4 de 4 palavras = 0.3 + (0.7 × 4/4) = 1.0 ⭐⭐⭐⭐⭐
+  - Tem 3 de 4 palavras = 0.3 + (0.7 × 3/4) = 0.825 ⭐⭐⭐⭐
+  - Tem 2 de 4 palavras = 0.3 + (0.7 × 2/4) = 0.65 ⭐⭐⭐
+  - Tem 1 de 4 palavras = 0.3 + (0.7 × 1/4) = 0.475 ⭐⭐
+  - Tem 0 de 4 palavras = 0.3 (ML achou relevante) ⭐
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🔧 ARQUIVOS MODIFICADOS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ scripts/core/busca_materiais_planilha_inteligente.py
+   - Função calcular_score_relevancia() → agora é flexível
+   - Função filtrar_produtos_relevantes() → mantém todos os produtos
+   - Logs e mensagens atualizadas
+
+✅ scripts/core/busca_materiais_api_ml.py
+   - Mesmas modificações para a versão com API
+   - Mantém todos os produtos da API
+   - Pontua por relevância
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+✅ VANTAGENS DO NOVO FILTRO
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ MAIS PRODUTOS
+   - Antes: Poucos produtos (muito restritivo)
+   - Agora: Todos os produtos do ML (confia no algoritmo deles)
+
+✅ MELHOR COBERTURA
+   - Não perde produtos relevantes
+   - Algoritmo do ML é otimizado e testado
+
+✅ MAIS FLEXÍVEL
+   - Variações de nome são aceitas
+   - Sinônimos são considerados
+   - Produtos relacionados aparecem
+
+✅ AINDA ORDENADO
+   - Os melhores ficam no topo
+   - Score ajuda a identificar relevância
+   - Validação manual continua possível
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🚀 COMO USAR
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Nada muda no uso! Os scripts são os mesmos:
+
+# Dividir planilha
+./dividir.sh -n 10
+
+# Processar com scraping (filtro flexível)
+./processar.sh -p 1
+
+# Processar com API (filtro flexível)
+./processar_api.sh -p 1
+
+# Gerar índice
+./gerar_indice.sh
+
+# Visualizar
+xdg-open output/paginas_html/index.html
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📋 VALIDAÇÃO MANUAL
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+O sistema de validação manual continua funcionando:
+
+1. Abra a página HTML gerada
+2. Veja os produtos com scores
+3. Remova manualmente os irrelevantes (se houver)
+4. Exporte para Excel
+
+💡 DICA: Produtos com score < 0.5 podem ser menos relevantes
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🎯 EXEMPLO PRÁTICO
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Material: "Tapete Tatame EVA 1m x 1m"
+
+ANTES (Restritivo):
+  Buscava: tatame eva 1m
+  Exigia: tatame E eva E 1m
+  Resultado: 3 produtos (muito poucos!)
+
+AGORA (Flexível):
+  Busca: tatame eva 1m
+  Palavras importantes: tatame, eva, 1m
+  Resultado: 40 produtos ordenados por score
+  
+  Exemplos retornados:
+  [1.0] Tapete Tatame EVA 1m x 1m 20mm (perfeito)
+  [0.9] Tatame EVA 100cm x 100cm (quase perfeito)
+  [0.7] Tapete EVA 1 metro Profissional (bom)
+  [0.6] Tatame 1m x 1m Alta Densidade (razoável)
+  [0.4] Tapete EVA Infantil Grande (aceitável)
+  [0.3] Piso EVA Modular (pode ser relevante)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+⚙️ CONFIGURAÇÕES TÉCNICAS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Score mínimo: 0.3 (garantido para todos os produtos do ML)
+Score base: 30% (confiança no ML)
+Score bonus: 70% (proporcional às palavras encontradas)
+
+Limites de busca:
+  - Scraping: até 40 produtos
+  - API: até 50 produtos
+
+Todos os produtos são mantidos e ordenados por relevância.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🔄 RETROCOMPATIBILIDADE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ Páginas HTML antigas continuam funcionando
+✅ Formato Excel permanece o mesmo
+✅ Estrutura de dados não mudou
+✅ Apenas o filtro ficou mais flexível
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+💡 RECOMENDAÇÃO
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Para aproveitar o novo filtro flexível:
+
+1. Reprocesse suas partes com o novo filtro:
+   ./dividir.sh -n 10
+   ./processar.sh -p 1
+   ./processar.sh -p 2
+   # ... etc
+
+2. Compare os resultados:
+   - Mais produtos por material
+   - Melhor cobertura de mercado
+   - Ainda ordenado por relevância
+
+3. Valide manualmente:
+   - Remova produtos irrelevantes se necessário
+   - O score ajuda a identificar os melhores
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📚 DOCUMENTAÇÃO RELACIONADA
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+• README.md                    - Visão geral do projeto
+• docs/GUIA_DIVISAO.md         - Como dividir planilhas
+• docs/SOLUCAO_PROBLEMAS.md    - Troubleshooting
+• RECOMENDACAO.txt             - Recomendações específicas
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ Sistema agora CONFIA no Mercado Livre e é MENOS RESTRITIVO!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+

@@ -1,0 +1,189 @@
+2025-10-02 12:09:57,440 - INFO - 🔍 Buscando: AEROBICA - kit lanche
+2025-10-02 12:09:59,441 - INFO - 📝 Otimizando: AEROBICA - kit lanche
+2025-10-02 12:09:59,442 - INFO -    ✂️  Usando: 'kit lanche'
+2025-10-02 12:09:59,443 - INFO -    ✅ Termo: 'lanche kit'
+2025-10-02 12:09:59,443 - INFO -    🔴 OBRIGATÓRIAS: ['lanche']
+2025-10-02 12:09:59,444 - INFO -    🟡 OPCIONAIS: ['kit']
+2025-10-02 12:10:02,373 - INFO -    📦 Produtos brutos: 40
+2025-10-02 12:10:02,373 - INFO -    🎯 FILTRO INTELIGENTE: 40 → 30
+2025-10-02 12:10:02,376 - INFO -       (EXIGIU palavras obrigatórias: ['lanche'])
+2025-10-02 12:10:02,376 - INFO -    🏆 Top 3:
+2025-10-02 12:10:02,376 - INFO -       1. [1.00] Kit 5 Utensílios Para Chapa De Restaurante Lanchonete Lanche...
+2025-10-02 12:10:02,376 - INFO -       2. [1.00] Kit 5 Utensílios Para Chapa De Lanche Lanchonete Restaurante...
+2025-10-02 12:10:02,376 - INFO -       3. [1.00] Kit 5 Utensílios Para Chapa De Lanche Lanchonete Restaurante...
+2025-10-02 12:10:05,378 - INFO - 🔍 Buscando: ARTES MARCIAIS - tatame
+2025-10-02 12:10:07,379 - INFO - 📝 Otimizando: ARTES MARCIAIS - tatame
+2025-10-02 12:10:07,383 - INFO -    ✂️  Usando: 'tatame'
+2025-10-02 12:10:07,383 - INFO -    ✅ Termo: 'tatame'
+2025-10-02 12:10:07,384 - INFO -    🔴 OBRIGATÓRIAS: ['tatame']
+2025-10-02 12:10:07,384 - INFO -    🟡 OPCIONAIS: []
+2025-10-02 12:10:09,252 - INFO -    📦 Produtos brutos: 40
+2025-10-02 12:10:09,252 - INFO -    🎯 FILTRO INTELIGENTE: 40 → 33
+2025-10-02 12:10:09,252 - INFO -       (EXIGIU palavras obrigatórias: ['tatame'])
+2025-10-02 12:10:09,252 - INFO -    🏆 Top 3:
+2025-10-02 12:10:09,252 - INFO -       1. [1.00] Kit 10 Peças Tatame Eva Infantil Adulto 50x50cm 10mm Preto +...
+2025-10-02 12:10:09,252 - INFO -       2. [1.00] Kit 10 Tatames 50x50 20mm Colorido Econômico...
+2025-10-02 12:10:09,253 - INFO -       3. [1.00] Kit 15 Tapetes Tatame Eva Bebe Infantil 50cm X 50cm X 10mm C...
+2025-10-02 12:10:12,254 - INFO - 🔍 Buscando: ATIVIDADES PARA PESSOAS COM DEFICIÊNCIA - Banner PCD
+2025-10-02 12:10:14,254 - INFO - 📝 Otimizando: ATIVIDADES PARA PESSOAS COM DEFICIÊNCIA - Banner PCD
+2025-10-02 12:10:14,255 - INFO -    ✂️  Usando: 'Banner PCD'
+2025-10-02 12:10:14,255 - INFO -    ✅ Termo: 'banner pcd'
+2025-10-02 12:10:14,255 - INFO -    🔴 OBRIGATÓRIAS: ['banner', 'pcd']
+2025-10-02 12:10:14,255 - INFO -    🟡 OPCIONAIS: []
+2025-10-02 12:10:16,805 - INFO -    📦 Produtos brutos: 40
+2025-10-02 12:10:16,805 - INFO -    🎯 FILTRO INTELIGENTE: 40 → 0
+2025-10-02 12:10:16,808 - INFO -       (EXIGIU palavras obrigatórias: ['banner', 'pcd'])
+2025-10-02 12:10:19,810 - INFO - 🔍 Buscando: ATIVIDADES PARA PESSOAS COM DEFICIÊNCIA - Kit Bolas Suíças PCD
+2025-10-02 12:10:21,810 - INFO - 📝 Otimizando: ATIVIDADES PARA PESSOAS COM DEFICIÊNCIA - Kit Bolas Suíças PCD
+2025-10-02 12:10:21,811 - INFO -    ✂️  Usando: 'Kit Bolas Suíças PCD'
+2025-10-02 12:10:21,815 - INFO -    ✅ Termo: 'bolas suíças pcd kit'
+2025-10-02 12:10:21,815 - INFO -    🔴 OBRIGATÓRIAS: ['bolas', 'suíças', 'pcd']
+2025-10-02 12:10:21,816 - INFO -    🟡 OPCIONAIS: ['kit']
+2025-10-02 12:10:24,045 - INFO -    📦 Produtos brutos: 40
+2025-10-02 12:10:24,045 - INFO -    🎯 FILTRO INTELIGENTE: 40 → 0
+2025-10-02 12:10:24,045 - INFO -       (EXIGIU palavras obrigatórias: ['bolas', 'suíças', 'pcd'])
+2025-10-02 12:10:27,046 - INFO - 🔍 Buscando: ATIVIDADES PARA PESSOAS COM DEFICIÊNCIA - Kit Kettlebells PCD
+2025-10-02 12:10:29,046 - INFO - 📝 Otimizando: ATIVIDADES PARA PESSOAS COM DEFICIÊNCIA - Kit Kettlebells PCD
+2025-10-02 12:10:29,047 - INFO -    ✂️  Usando: 'Kit Kettlebells PCD'
+2025-10-02 12:10:29,047 - INFO -    ✅ Termo: 'kettlebells pcd kit'
+2025-10-02 12:10:29,048 - INFO -    🔴 OBRIGATÓRIAS: ['kettlebells', 'pcd']
+2025-10-02 12:10:29,048 - INFO -    🟡 OPCIONAIS: ['kit']
+2025-10-02 12:10:31,607 - INFO -    📦 Produtos brutos: 40
+2025-10-02 12:10:31,607 - INFO -    🎯 FILTRO INTELIGENTE: 40 → 0
+2025-10-02 12:10:31,608 - INFO -       (EXIGIU palavras obrigatórias: ['kettlebells', 'pcd'])
+2025-10-02 12:14:37,227 - INFO - 🔍 Buscando: AEROBICA - kit lanche
+2025-10-02 12:14:39,228 - INFO - 📝 Otimizando: AEROBICA - kit lanche
+2025-10-02 12:14:39,228 - INFO -    ✂️  Usando: 'kit lanche'
+2025-10-02 12:14:39,228 - INFO -    ✅ Termo: 'lanche kit'
+2025-10-02 12:14:39,228 - INFO -    🔴 OBRIGATÓRIAS: ['lanche']
+2025-10-02 12:14:39,228 - INFO -    🟡 OPCIONAIS: ['kit']
+2025-10-02 12:14:41,332 - INFO -    📦 Produtos brutos: 40
+2025-10-02 12:14:41,332 - INFO -    🎯 FILTRO INTELIGENTE: 40 → 29
+2025-10-02 12:14:41,332 - INFO -       (EXIGIU palavras obrigatórias: ['lanche'])
+2025-10-02 12:14:41,332 - INFO -    🏆 Top 3:
+2025-10-02 12:14:41,332 - INFO -       1. [1.00] Kit 5 Utensílios Para Chapa De Lanche Lanchonete Restaurante...
+2025-10-02 12:14:41,332 - INFO -       2. [1.00] Kit 5 Utensílios Para Chapa De Lanche Lanchonete Restaurante...
+2025-10-02 12:14:41,332 - INFO -       3. [1.00] Kit Mochila Escolar, Lancheira Térmica, Pote P/ Lanche E Gar...
+2025-10-02 12:14:44,337 - INFO - 🔍 Buscando: ARTES MARCIAIS - tatame
+2025-10-02 12:14:46,338 - INFO - 📝 Otimizando: ARTES MARCIAIS - tatame
+2025-10-02 12:14:46,338 - INFO -    ✂️  Usando: 'tatame'
+2025-10-02 12:14:46,342 - INFO -    ✅ Termo: 'tatame'
+2025-10-02 12:14:46,342 - INFO -    🔴 OBRIGATÓRIAS: ['tatame']
+2025-10-02 12:14:46,342 - INFO -    🟡 OPCIONAIS: []
+2025-10-02 12:14:47,975 - INFO -    📦 Produtos brutos: 40
+2025-10-02 12:14:47,975 - INFO -    🎯 FILTRO INTELIGENTE: 40 → 33
+2025-10-02 12:14:47,976 - INFO -       (EXIGIU palavras obrigatórias: ['tatame'])
+2025-10-02 12:14:47,976 - INFO -    🏆 Top 3:
+2025-10-02 12:14:47,976 - INFO -       1. [1.00] Kit 10 Peças Tatame Eva Infantil Adulto 50x50cm 10mm Preto +...
+2025-10-02 12:14:47,976 - INFO -       2. [1.00] Kit 10 Tatames 50x50 20mm Colorido Econômico...
+2025-10-02 12:14:47,976 - INFO -       3. [1.00] Kit 15 Tapetes Tatame Eva Bebe Infantil 50cm X 50cm X 10mm C...
+2025-10-02 12:15:52,788 - INFO - 🔍 Buscando: AEROBICA - kit lanche
+2025-10-02 12:15:54,789 - INFO - 📝 Otimizando: AEROBICA - kit lanche
+2025-10-02 12:15:54,789 - INFO -    ✂️  Usando: 'kit lanche'
+2025-10-02 12:15:54,789 - INFO -    ✅ Termo: 'lanche kit'
+2025-10-02 12:15:54,789 - INFO -    🔴 OBRIGATÓRIAS: ['lanche']
+2025-10-02 12:15:54,789 - INFO -    🟡 OPCIONAIS: ['kit']
+2025-10-02 12:15:57,195 - INFO -    📦 Produtos brutos: 40
+2025-10-02 12:15:57,196 - INFO -    🎯 FILTRO INTELIGENTE: 40 → 29
+2025-10-02 12:15:57,196 - INFO -       (EXIGIU palavras obrigatórias: ['lanche'])
+2025-10-02 12:15:57,196 - INFO -    🏆 Top 3:
+2025-10-02 12:15:57,196 - INFO -       1. [1.00] Kit 5 Utensílios Para Chapa De Lanche Lanchonete Restaurante...
+2025-10-02 12:15:57,196 - INFO -       2. [1.00] Kit 5 Utensílios Para Chapa De Lanche Lanchonete Restaurante...
+2025-10-02 12:15:57,196 - INFO -       3. [1.00] Kit Mochila Escolar, Lancheira Térmica, Pote P/ Lanche E Gar...
+2025-10-02 12:16:00,198 - INFO - 🔍 Buscando: ARTES MARCIAIS - tatame
+2025-10-02 12:16:02,198 - INFO - 📝 Otimizando: ARTES MARCIAIS - tatame
+2025-10-02 12:16:02,198 - INFO -    ✂️  Usando: 'tatame'
+2025-10-02 12:16:02,199 - INFO -    ✅ Termo: 'tatame'
+2025-10-02 12:16:02,199 - INFO -    🔴 OBRIGATÓRIAS: ['tatame']
+2025-10-02 12:16:02,199 - INFO -    🟡 OPCIONAIS: []
+2025-10-02 12:16:03,649 - INFO -    📦 Produtos brutos: 40
+2025-10-02 12:16:03,649 - INFO -    🎯 FILTRO INTELIGENTE: 40 → 33
+2025-10-02 12:16:03,653 - INFO -       (EXIGIU palavras obrigatórias: ['tatame'])
+2025-10-02 12:16:03,653 - INFO -    🏆 Top 3:
+2025-10-02 12:16:03,653 - INFO -       1. [1.00] Kit 10 Peças Tatame Eva Infantil Adulto 50x50cm 10mm Preto +...
+2025-10-02 12:16:03,653 - INFO -       2. [1.00] Kit 10 Tatames 50x50 20mm Colorido Econômico...
+2025-10-02 12:16:03,653 - INFO -       3. [1.00] Kit 15 Tapetes Tatame Eva Bebe Infantil 50cm X 50cm X 10mm C...
+2025-10-02 12:16:06,655 - INFO - 🔍 Buscando: ATIVIDADES PARA PESSOAS COM DEFICIÊNCIA - Banner PCD
+2025-10-02 12:16:08,655 - INFO - 📝 Otimizando: ATIVIDADES PARA PESSOAS COM DEFICIÊNCIA - Banner PCD
+2025-10-02 12:16:08,656 - INFO -    ✂️  Usando: 'Banner PCD'
+2025-10-02 12:16:08,656 - INFO -    ✅ Termo: 'banner pcd'
+2025-10-02 12:16:08,660 - INFO -    🔴 OBRIGATÓRIAS: ['banner', 'pcd']
+2025-10-02 12:16:08,660 - INFO -    🟡 OPCIONAIS: []
+2025-10-02 12:16:11,149 - INFO -    📦 Produtos brutos: 40
+2025-10-02 12:16:11,149 - INFO -    🎯 FILTRO INTELIGENTE: 40 → 0
+2025-10-02 12:16:11,149 - INFO -       (EXIGIU palavras obrigatórias: ['banner', 'pcd'])
+2025-10-02 12:16:14,150 - INFO - 🔍 Buscando: ATIVIDADES PARA PESSOAS COM DEFICIÊNCIA - Kit Bolas Suíças PCD
+2025-10-02 12:16:16,150 - INFO - 📝 Otimizando: ATIVIDADES PARA PESSOAS COM DEFICIÊNCIA - Kit Bolas Suíças PCD
+2025-10-02 12:16:16,150 - INFO -    ✂️  Usando: 'Kit Bolas Suíças PCD'
+2025-10-02 12:16:16,151 - INFO -    ✅ Termo: 'bolas suíças pcd kit'
+2025-10-02 12:16:16,151 - INFO -    🔴 OBRIGATÓRIAS: ['bolas', 'suíças', 'pcd']
+2025-10-02 12:16:16,152 - INFO -    🟡 OPCIONAIS: ['kit']
+2025-10-02 12:16:18,014 - INFO -    📦 Produtos brutos: 40
+2025-10-02 12:16:18,014 - INFO -    🎯 FILTRO INTELIGENTE: 40 → 0
+2025-10-02 12:16:18,014 - INFO -       (EXIGIU palavras obrigatórias: ['bolas', 'suíças', 'pcd'])
+2025-10-02 12:16:21,015 - INFO - 🔍 Buscando: ATIVIDADES PARA PESSOAS COM DEFICIÊNCIA - Kit Kettlebells PCD
+2025-10-02 12:16:23,016 - INFO - 📝 Otimizando: ATIVIDADES PARA PESSOAS COM DEFICIÊNCIA - Kit Kettlebells PCD
+2025-10-02 12:16:23,016 - INFO -    ✂️  Usando: 'Kit Kettlebells PCD'
+2025-10-02 12:16:23,016 - INFO -    ✅ Termo: 'kettlebells pcd kit'
+2025-10-02 12:16:23,017 - INFO -    🔴 OBRIGATÓRIAS: ['kettlebells', 'pcd']
+2025-10-02 12:16:23,017 - INFO -    🟡 OPCIONAIS: ['kit']
+2025-10-02 12:16:25,255 - INFO -    📦 Produtos brutos: 40
+2025-10-02 12:16:25,255 - INFO -    🎯 FILTRO INTELIGENTE: 40 → 0
+2025-10-02 12:16:25,255 - INFO -       (EXIGIU palavras obrigatórias: ['kettlebells', 'pcd'])
+2025-10-02 12:16:28,256 - INFO - 🔍 Buscando: ATIVIDADES PARA PESSOAS COM DEFICIÊNCIA - Medalhas PCD
+2025-10-02 12:16:30,257 - INFO - 📝 Otimizando: ATIVIDADES PARA PESSOAS COM DEFICIÊNCIA - Medalhas PCD
+2025-10-02 12:16:30,257 - INFO -    ✂️  Usando: 'Medalhas PCD'
+2025-10-02 12:16:30,258 - INFO -    ✅ Termo: 'medalhas pcd'
+2025-10-02 12:16:30,258 - INFO -    🔴 OBRIGATÓRIAS: ['medalhas', 'pcd']
+2025-10-02 12:16:30,258 - INFO -    🟡 OPCIONAIS: []
+2025-10-02 12:16:32,790 - INFO -    📦 Produtos brutos: 40
+2025-10-02 12:16:32,791 - INFO -    🎯 FILTRO INTELIGENTE: 40 → 0
+2025-10-02 12:16:32,791 - INFO -       (EXIGIU palavras obrigatórias: ['medalhas', 'pcd'])
+2025-10-02 12:16:35,792 - INFO - 🔍 Buscando: ATLETISMO - Apito
+2025-10-02 12:16:37,793 - INFO - 📝 Otimizando: ATLETISMO - Apito
+2025-10-02 12:16:37,793 - INFO -    ✂️  Usando: 'Apito'
+2025-10-02 12:16:37,793 - INFO -    ✅ Termo: 'apito'
+2025-10-02 12:16:37,794 - INFO -    🔴 OBRIGATÓRIAS: ['apito']
+2025-10-02 12:16:37,794 - INFO -    🟡 OPCIONAIS: []
+2025-10-02 12:16:39,492 - INFO -    📦 Produtos brutos: 40
+2025-10-02 12:16:39,492 - INFO -    🎯 FILTRO INTELIGENTE: 40 → 40
+2025-10-02 12:16:39,492 - INFO -       (EXIGIU palavras obrigatórias: ['apito'])
+2025-10-02 12:16:39,492 - INFO -    🏆 Top 3:
+2025-10-02 12:16:39,493 - INFO -       1. [1.00] Apito Profissional De Metal Com Cordão Art Sport 2u...
+2025-10-02 12:16:39,493 - INFO -       2. [1.00] Apito De Jogo Metal Sport Com 2 Unidades Western Cor Pratead...
+2025-10-02 12:16:39,493 - INFO -       3. [1.00] Apito Emergência Sobrevivência Barco Lancha Salva Vidas Pro ...
+2025-10-02 12:16:42,494 - INFO - 🔍 Buscando: ATLETISMO - Arcos planos de agilidade
+2025-10-02 12:16:44,495 - INFO - 📝 Otimizando: ATLETISMO - Arcos planos de agilidade
+2025-10-02 12:16:44,496 - INFO -    ✂️  Usando: 'Arcos planos de agilidade'
+2025-10-02 12:16:44,496 - INFO -    ✅ Termo: 'arcos planos agilidade'
+2025-10-02 12:16:44,496 - INFO -    🔴 OBRIGATÓRIAS: ['arcos', 'planos', 'agilidade']
+2025-10-02 12:16:44,497 - INFO -    🟡 OPCIONAIS: []
+2025-10-02 12:16:46,641 - INFO -    📦 Produtos brutos: 40
+2025-10-02 12:16:46,641 - INFO -    🎯 FILTRO INTELIGENTE: 40 → 0
+2025-10-02 12:16:46,641 - INFO -       (EXIGIU palavras obrigatórias: ['arcos', 'planos', 'agilidade'])
+2025-10-02 12:16:49,642 - INFO - 🔍 Buscando: ATLETISMO - BARREIRA DE SALTO
+2025-10-02 12:16:51,643 - INFO - 📝 Otimizando: ATLETISMO - BARREIRA DE SALTO
+2025-10-02 12:16:51,644 - INFO -    ✂️  Usando: 'BARREIRA DE SALTO'
+2025-10-02 12:16:51,648 - INFO -    ✅ Termo: 'barreira salto'
+2025-10-02 12:16:51,648 - INFO -    🔴 OBRIGATÓRIAS: ['barreira', 'salto']
+2025-10-02 12:16:51,649 - INFO -    🟡 OPCIONAIS: []
+2025-10-02 12:16:53,353 - INFO -    📦 Produtos brutos: 40
+2025-10-02 12:16:53,354 - INFO -    🎯 FILTRO INTELIGENTE: 40 → 31
+2025-10-02 12:16:53,354 - INFO -       (EXIGIU palavras obrigatórias: ['barreira', 'salto'])
+2025-10-02 12:16:53,354 - INFO -    🏆 Top 3:
+2025-10-02 12:16:53,354 - INFO -       1. [1.00] Kit Barreira De Salto Ajustável Odin Fit Funcional Agilidade...
+2025-10-02 12:16:53,354 - INFO -       2. [1.00] Kit 6 Barreiras De Salto Com Cone Muvin 24 Cm - Funcional...
+2025-10-02 12:16:53,354 - INFO -       3. [1.00] Kit Funcional Barreira De Salto Obstáculo Regulável 3 Un...
+2025-10-02 12:16:56,356 - INFO - 🔍 Buscando: ATLETISMO - BLOCO DE PARTIDA
+2025-10-02 12:16:58,356 - INFO - 📝 Otimizando: ATLETISMO - BLOCO DE PARTIDA
+2025-10-02 12:16:58,356 - INFO -    ✂️  Usando: 'BLOCO DE PARTIDA'
+2025-10-02 12:16:58,356 - INFO -    ✅ Termo: 'bloco partida'
+2025-10-02 12:16:58,356 - INFO -    🔴 OBRIGATÓRIAS: ['bloco', 'partida']
+2025-10-02 12:16:58,357 - INFO -    🟡 OPCIONAIS: []
+2025-10-02 12:17:00,023 - INFO -    📦 Produtos brutos: 40
+2025-10-02 12:17:00,023 - INFO -    🎯 FILTRO INTELIGENTE: 40 → 5
+2025-10-02 12:17:00,023 - INFO -       (EXIGIU palavras obrigatórias: ['bloco', 'partida'])
+2025-10-02 12:17:00,023 - INFO -    🏆 Top 3:
+2025-10-02 12:17:00,023 - INFO -       1. [1.00] Bloco De Partida - Olympic Elite Modelo Novo - Nelco...
+2025-10-02 12:17:00,023 - INFO -       2. [1.00] Bloco De Partida Competition Ajustável Nelco N1131csba...
+2025-10-02 12:17:00,023 - INFO -       3. [1.00] Carcaça Bloco Cilindro Motor 8 Hp Gasolina Partida Eletrica...

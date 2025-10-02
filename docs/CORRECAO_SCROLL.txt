@@ -1,0 +1,176 @@
+╔══════════════════════════════════════════════════════════════════════╗
+║                                                                      ║
+║           ✅ CORREÇÃO DO BUG DE SCROLL IMPLEMENTADA                 ║
+║                                                                      ║
+╚══════════════════════════════════════════════════════════════════════╝
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🐛 PROBLEMA ORIGINAL
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Ao clicar em "✕ Remover" em um produto:
+  ❌ A página voltava ao topo (scroll para position 0)
+  ❌ Difícil remover vários produtos em sequência
+  ❌ Perdia a posição de visualização
+
+Causa:
+  A função removerProduto() chamava renderizarMateriais()
+  que re-renderizava TODA a página, resetando o scroll.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+✅ SOLUÇÃO IMPLEMENTADA
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Modificação da função removerProduto():
+
+ANTES:
+──────────────────────────────────────────────────────────────────
+function removerProduto(materialIdx, nomeProduto) {
+    produtosRemovidos.add(chave);
+    
+    // Re-renderiza TUDO ← PROBLEMA
+    renderizarMateriais(filtro);
+    atualizarEstatisticas();
+}
+
+AGORA:
+──────────────────────────────────────────────────────────────────
+function removerProduto(materialIdx, nomeProduto) {
+    produtosRemovidos.add(chave);
+    
+    // Remove apenas o elemento DOM específico
+    const baseId = `${materialIdx}-${nomeProduto}`;
+    const produtoId = `produto-${baseId.replace(/[^a-zA-Z0-9]/g, '_')}`;
+    const produtoElement = document.getElementById(produtoId);
+    
+    if (produtoElement) {
+        // Animação fade out
+        produtoElement.style.opacity = '0';
+        produtoElement.style.transform = 'translateX(-20px)';
+        
+        setTimeout(() => {
+            produtoElement.remove();  // Remove só este elemento
+            atualizarMaterialVisual(materialIdx);  // Atualiza estatísticas
+            atualizarEstatisticas();
+        }, 300);
+    }
+}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🎨 MELHORIAS VISUAIS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ Animação suave ao remover (fade out + slide)
+✅ Duração: 300ms
+✅ Produto desaparece gradualmente
+✅ Transição visual agradável
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🔧 FUNÇÃO ADICIONAL: atualizarMaterialVisual()
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Nova função que atualiza apenas o card do material específico:
+
+function atualizarMaterialVisual(materialIdx) {
+    // Recalcula estatísticas
+    // Atualiza badge (Sem produtos / Poucos / Com produtos)
+    // Atualiza contador de produtos
+    // Atualiza Min, Max, Média, Mediana, DP
+    
+    // SEM re-renderizar outros materiais
+}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📋 CORREÇÃO DO LIMPAR REMOVIDOS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+A função limparRemovidos() também foi corrigida:
+
+function limparRemovidos() {
+    if (confirm(...)) {
+        // Salva posição atual do scroll
+        const scrollPos = window.scrollY;
+        
+        produtosRemovidos.clear();
+        renderizarMateriais(filtro);
+        atualizarEstatisticas();
+        
+        // Restaura posição após 50ms
+        setTimeout(() => {
+            window.scrollTo(0, scrollPos);
+        }, 50);
+    }
+}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+✅ ARQUIVOS CORRIGIDOS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. templates/pagina_estatica.html
+   ✅ Template principal corrigido
+   ✅ Todas as páginas futuras terão a correção
+
+2. output/paginas_html/pagina_parte_1.html
+   ✅ Página já gerada foi atualizada
+
+3. scripts/corrigir_paginas_html.py
+   ✅ Script criado para corrigir páginas antigas
+   ✅ Pode ser executado novamente se necessário
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🎯 RESULTADO FINAL
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Agora ao remover produtos:
+  ✅ Página MANTÉM a posição do scroll
+  ✅ Animação suave ao remover
+  ✅ Estatísticas atualizadas automaticamente
+  ✅ Badge atualizado (Poucos/Com produtos/Sem produtos)
+  ✅ Pode remover vários produtos em sequência
+  ✅ Experiência de uso muito melhorada
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🚀 COMO USAR
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. Páginas futuras:
+   - Serão geradas automaticamente com a correção
+   - Nada precisa ser feito
+
+2. Corrigir páginas antigas (se houver):
+   cd scripts
+   python3 corrigir_paginas_html.py
+
+3. Testar:
+   xdg-open output/paginas_html/pagina_parte_1.html
+   - Click em "Mostrar Produtos"
+   - Scroll para baixo
+   - Click em "✕ Remover" em algum produto
+   - Página mantém a posição! ✅
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+💡 DETALHES TÉCNICOS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+ID do Produto:
+  Formato: produto-{idx}-{nome}
+  Caracteres especiais substituídos por underscore
+  
+  Exemplo:
+    Input: idx=0, nome="Bola Suíça 65cm"
+    baseId = "0-Bola Suíça 65cm"
+    Após replace = "0_Bola_Su_a_65cm"
+    ID final = "produto-0_Bola_Su_a_65cm"
+
+Manipulação DOM:
+  - document.getElementById() para encontrar elemento
+  - element.remove() para remover do DOM
+  - element.style para animações CSS
+  - setTimeout() para delay da animação
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ Bug de scroll corrigido e funcionalidade melhorada!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+

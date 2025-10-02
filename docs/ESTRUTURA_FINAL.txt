@@ -1,0 +1,240 @@
+╔══════════════════════════════════════════════════════════════════════╗
+║                                                                      ║
+║          ✅ ESTRUTURA FINAL DO PROJETO (LIMPA)                      ║
+║                                                                      ║
+╚══════════════════════════════════════════════════════════════════════╝
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📂 ESTRUTURA COMPLETA
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+busca_precos/
+│
+├── 📄 RAIZ (6 arquivos essenciais)
+│   ├── README.md                    ✅ Documentação principal
+│   ├── materiais.xlsx               ✅ Planilha de entrada (3306 materiais)
+│   ├── requirements.txt             ✅ Dependências Python
+│   ├── .gitignore                   ✅ Git ignore
+│   ├── dividir.sh                   ✅ Dividir planilha (configurável)
+│   ├── processar.sh                 ✅ Processar com Mercado Livre
+│   └── gerar_indice.sh              ✅ Gerar índice HTML
+│
+├── 📂 scripts/ (Scripts Python)
+│   ├── dividir_planilha.py          ✅ Divisão em N partes
+│   ├── processar_parte.py           ✅ Processamento principal
+│   ├── gerar_indice.py              ✅ Gerador de índice
+│   ├── gerar_paginas_estaticas.py   ✅ Gerador de HTML
+│   ├── testar_paginas_estaticas.py  ✅ Testes rápidos
+│   ├── corrigir_paginas_html.py     ✅ Corretor de páginas antigas
+│   └── core/
+│       └── busca_materiais_planilha_inteligente.py  ✅ Motor principal
+│
+├── 📂 docs/ (Documentação)
+│   ├── LEIA_PRIMEIRO.txt            📖 Início rápido
+│   ├── INICIO_AQUI.md               📖 Guia de início
+│   ├── ALTERACOES_INTERFACE.txt     📖 Mudanças na interface
+│   ├── CORRECAO_SCROLL.txt          📖 Correção do scroll
+│   ├── GUIA_DIVISAO.md              📖 Guia de divisão
+│   ├── EXEMPLOS_DIVISAO.txt         📖 Exemplos práticos
+│   ├── LIMPEZA_PROJETO.txt          📖 Histórico de limpeza
+│   ├── ALTERACOES_DIVISAO.txt       📖 Divisão configurável
+│   ├── FILTRO_FLEXIVEL.txt          📖 Filtro flexível
+│   ├── RECOMENDACAO.txt             📖 Recomendações
+│   ├── REORGANIZADO.txt             📖 Histórico reorganização
+│   ├── COMANDOS_RAPIDOS.md          📖 Referência rápida
+│   ├── FLUXO_RECOMENDADO.md         📖 Fluxo completo
+│   ├── SOLUCAO_PROBLEMAS.md         📖 Troubleshooting
+│   └── outros...
+│
+├── 📂 templates/ (Templates HTML)
+│   ├── pagina_estatica.html         ✅ Template principal (atualizado)
+│   ├── visualizador.html            ✅ Visualizador
+│   └── index.html                   ✅ Template de índice
+│
+├── 📂 output/ (Arquivos gerados)
+│   ├── partes/                      📦 100 partes geradas
+│   ├── paginas_html/                🌐 Páginas HTML geradas
+│   └── logs/                        📝 Logs de execução
+│
+└── 📂 backup_antigo/ (Backup histórico)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+✅ FUNCIONALIDADES IMPLEMENTADAS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. 🔍 BUSCA COM TERMO COMPLETO
+   ✅ Usa modalidade + descrição completa
+   ✅ Melhor relevância nos resultados
+
+2. 📊 SCORE DE RELEVÂNCIA
+   ✅ Todas as palavras contam (incluindo modalidade)
+   ✅ Score de 0.3 a 1.0
+   ✅ Produtos ordenados por relevância
+
+3. 🎯 FILTRO FLEXÍVEL
+   ✅ Confia no mecanismo do Mercado Livre
+   ✅ Mantém todos os produtos retornados
+   ✅ Não elimina produtos prematuramente
+
+4. 🎛️ INTERFACE COLAPSÁVEL
+   ✅ Produtos escondidos por padrão
+   ✅ Botão "Mostrar/Esconder Produtos"
+   ✅ Interface limpa e organizada
+
+5. 🚫 REMOÇÃO SEM SCROLL
+   ✅ Remove produto sem perder posição
+   ✅ Animação suave (fade out)
+   ✅ Estatísticas atualizadas automaticamente
+
+6. 📊 ESTATÍSTICAS COMPLETAS
+   ✅ Mínimo, Máximo, Média, Mediana, Moda, DP
+   ✅ Visíveis sem expandir produtos
+
+7. 📋 EXPORTAÇÃO EXCEL
+   ✅ 1 material por linha
+   ✅ Produtos em JSON com links
+   ✅ Estatísticas incluídas
+
+8. ⚙️ DIVISÃO CONFIGURÁVEL
+   ✅ Qualquer número de partes (-n)
+   ✅ Recomendações por cenário
+   ✅ Otimização para processamento paralelo
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🚀 FLUXO COMPLETO DE USO
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+# 1. Dividir planilha (escolha o número de partes)
+./dividir.sh -n 10                   # 10 partes (recomendado)
+
+# 2. Processar partes (sequencial ou paralelo)
+./processar.sh -p 1                  # Parte 1
+./processar.sh -p 2                  # Parte 2
+# ... até parte 10
+
+# 3. Gerar índice
+./gerar_indice.sh
+
+# 4. Visualizar e validar
+xdg-open output/paginas_html/index.html
+
+# 5. Para cada material:
+#    - Click em "Mostrar Produtos"
+#    - Remova produtos irrelevantes
+#    - Veja estatísticas atualizadas
+
+# 6. Exportar para Excel
+#    - Click em "📊 Exportar para Excel"
+#    - Arquivo baixado automaticamente
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+⏱️ TEMPO DE EXECUÇÃO (SCRAPING)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Processamento SEQUENCIAL:
+  3 partes  → ~5h 30min
+  6 partes  → ~4h
+  10 partes → ~5h 30min
+  20 partes → ~2h 20min
+
+Processamento PARALELO (recomendado):
+  3 partes  → ~1h 50min
+  6 partes  → ~40 min
+  10 partes → ~14 min      ⭐ RECOMENDADO
+  20 partes → ~7 min       ⚡ MAIS RÁPIDO
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📋 ARQUIVOS PRINCIPAIS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+RAIZ (apenas essenciais):
+  • dividir.sh                        → Dividir planilha
+  • processar.sh                      → Processar parte
+  • gerar_indice.sh                   → Gerar índice
+  • materiais.xlsx                    → Planilha entrada
+  • README.md                         → Documentação
+  • requirements.txt                  → Dependências
+
+SCRIPTS:
+  • dividir_planilha.py               → Divisão configurável
+  • processar_parte.py                → Motor de processamento
+  • gerar_indice.py                   → Geração de índice
+  • gerar_paginas_estaticas.py        → Geração de HTML
+  • testar_paginas_estaticas.py       → Testes rápidos
+  • corrigir_paginas_html.py          → Corretor de páginas
+  • core/busca_materiais_planilha_inteligente.py  → Motor de busca
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+✨ CARACTERÍSTICAS PRINCIPAIS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ Busca no Mercado Livre (scraping)
+✅ Filtro flexível (confia no ML)
+✅ Termo completo na busca (com modalidade)
+✅ Score de relevância (0.3 a 1.0)
+✅ Interface colapsável (produtos escondidos)
+✅ Remoção sem scroll (mantém posição)
+✅ Estatísticas completas
+✅ Exportação Excel otimizada
+✅ Divisão configurável (3 a 100+ partes)
+✅ Processamento paralelo suportado
+✅ Logs detalhados
+✅ Documentação completa
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📚 DOCUMENTAÇÃO DISPONÍVEL
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+• README.md                         → Visão geral e início rápido
+• docs/LEIA_PRIMEIRO.txt            → Comece aqui
+• docs/ALTERACOES_INTERFACE.txt     → Mudanças recentes
+• docs/CORRECAO_SCROLL.txt          → Correção de bug
+• docs/GUIA_DIVISAO.md              → Como dividir planilhas
+• docs/EXEMPLOS_DIVISAO.txt         → Exemplos prontos
+• docs/FILTRO_FLEXIVEL.txt          → Explicação do filtro
+• docs/SOLUCAO_PROBLEMAS.md         → Troubleshooting
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🎯 COMANDOS ESSENCIAIS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+# Teste rápido (5 materiais)
+cd scripts
+python3 testar_paginas_estaticas.py -n 5
+
+# Processamento completo
+./dividir.sh -n 10
+./processar.sh -p 1
+./gerar_indice.sh
+xdg-open output/paginas_html/index.html
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🗑️ REMOVIDO RECENTEMENTE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Arquivos do PriceTrack (não utilizados):
+  ❌ processar_pricetrack.sh
+  ❌ scripts/processar_parte_pricetrack.py
+  ❌ scripts/core/busca_materiais_pricetrack.py
+  ❌ docs/GUIA_PRICETRACK.md
+
+Motivo: API PriceTrack não permite agendar coletas via API externa.
+Solução: Usar scraping direto do Mercado Livre.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+✅ SISTEMA FINAL
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Método: Scraping do Mercado Livre
+Filtro: Flexível (confia no ML)
+Interface: Colapsável e otimizada
+Exportação: Excel com 1 material/linha + JSON
+Divisão: Configurável (3 a 100+ partes)
+Processamento: Sequencial ou paralelo
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ Projeto limpo, organizado e pronto para uso!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+

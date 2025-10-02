@@ -1,0 +1,38 @@
+# Pastas geradas automaticamente
+output/partes/
+output/paginas_html/
+output/logs/
+
+# Cache Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+scripts/__pycache__/
+scripts/core/__pycache__/
+
+# Arquivos temporários
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+
+# Arquivos de teste gerados
+teste_*.xlsx
+teste_*.html
+
+# Arquivos do LibreOffice/Excel
+.~lock.*
+~$*.xlsx
+
+# IDEs
+.vscode/
+.idea/
+*.code-workspace
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+

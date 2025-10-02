@@ -1,0 +1,212 @@
+╔══════════════════════════════════════════════════════════════════════╗
+║                                                                      ║
+║        ✅ MELHORIAS NA INTERFACE E BUSCA IMPLEMENTADAS              ║
+║                                                                      ║
+╚══════════════════════════════════════════════════════════════════════╝
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+✅ ALTERAÇÕES REALIZADAS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. 🔍 TERMO COMPLETO NA BUSCA
+   ────────────────────────────────────────────────────────────────
+   ANTES:
+     ❌ Usava apenas a parte após o hífen
+     ❌ Exemplo: "Educação Infantil - Kit Bolas" → buscava "Kit Bolas"
+     ❌ Perdia a modalidade na busca
+   
+   AGORA:
+     ✅ Usa o termo COMPLETO incluindo a modalidade
+     ✅ Exemplo: "Educação Infantil - Kit Bolas" → busca tudo
+     ✅ Modalidade é incluída na busca e no cálculo do score
+
+2. 📊 MODALIDADE NO SCORE
+   ────────────────────────────────────────────────────────────────
+   ANTES:
+     ❌ Modalidade era ignorada no cálculo de relevância
+   
+   AGORA:
+     ✅ TODAS as palavras (incluindo modalidade) contam no score
+     ✅ Produtos que mencionam a modalidade têm score maior
+     ✅ Exemplo: "educação infantil" aumenta o score de relevância
+
+3. 🎛️ BOTÕES EXPANDIR/COLAPSAR
+   ────────────────────────────────────────────────────────────────
+   ANTES:
+     ❌ Produtos sempre visíveis
+     ❌ Páginas muito longas
+     ❌ Difícil navegar em muitos materiais
+   
+   AGORA:
+     ✅ Produtos INICIALMENTE ESCONDIDOS
+     ✅ Botão "Mostrar Produtos" em cada material
+     ✅ Click no botão expande/colapsa os produtos
+     ✅ Interface muito mais limpa e organizada
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🎨 DETALHES VISUAIS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Botão de Toggle:
+  • Cor: Gradiente roxo (#667eea → #764ba2)
+  • Estado inicial: "Mostrar Produtos ▼"
+  • Estado expandido: "Esconder Produtos ▲"
+  • Animação suave ao expandir/colapsar
+  • Ícone rotaciona ao clicar
+
+Comportamento:
+  • Produtos começam escondidos (display: none)
+  • Animação slideDown ao expandir
+  • Cada material tem seu próprio botão
+  • Estados independentes (um não afeta o outro)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📝 EXEMPLO PRÁTICO
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Material: "Educação Infantil - Kit Bolas Suíças"
+
+ANTES:
+  Termo buscado: "kit bolas suíças"
+  Palavras no score: [kit, bolas, suíças]
+  
+  Resultado:
+  • "Kit Bolas Suíça 65cm" → score 1.0
+  • "Educação Infantil Bolas" → score 0.6 (falta "suíças")
+  
+  Interface:
+  ┌─────────────────────────────────────────┐
+  │ Educação Infantil - Kit Bolas Suíças   │
+  │ ├─ Produto 1                            │
+  │ ├─ Produto 2                            │
+  │ ├─ Produto 3                            │
+  │ ... (sempre visível)                    │
+  └─────────────────────────────────────────┘
+
+AGORA:
+  Termo buscado: "educação infantil kit bolas suíças"
+  Palavras no score: [educação, infantil, kit, bolas, suíças]
+  
+  Resultado:
+  • "Kit Bolas Suíça Educação Infantil" → score 1.0 (TEM TUDO!)
+  • "Educação Infantil Bolas Ginástica" → score 0.8 (tem 3 de 5)
+  • "Kit Bolas Suíça 65cm" → score 0.6 (tem 3 de 5)
+  
+  Interface:
+  ┌─────────────────────────────────────────┐
+  │ Educação Infantil - Kit Bolas Suíças   │
+  │ 📦 15 produtos | Min: R$ 80 | Média: R$ 150 │
+  │                  [Mostrar Produtos ▼]   │  ← BOTÃO
+  └─────────────────────────────────────────┘
+  
+  Após clicar:
+  ┌─────────────────────────────────────────┐
+  │ Educação Infantil - Kit Bolas Suíças   │
+  │ 📦 15 produtos | Min: R$ 80 | Média: R$ 150 │
+  │                  [Esconder Produtos ▲]  │  ← BOTÃO EXPANDIDO
+  │ ├─ Produto 1 (Score: 1.0)              │
+  │ ├─ Produto 2 (Score: 0.9)              │
+  │ ├─ Produto 3 (Score: 0.8)              │
+  │ ... (expandido)                         │
+  └─────────────────────────────────────────┘
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🔧 ARQUIVOS MODIFICADOS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. scripts/core/busca_materiais_planilha_inteligente.py
+   ───────────────────────────────────────────────────────
+   • Função otimizar_termo_busca()
+     - Removida lógica de cortar após hífen
+     - Agora usa o termo completo
+     - Linha 60-63: termo_base = termo_original.strip()
+
+2. templates/pagina_estatica.html
+   ───────────────────────────────────────────────────────
+   • CSS (linhas 163-209):
+     - .produtos-list → display: none (inicial)
+     - .produtos-list.show → display: block
+     - .btn-toggle → estilo do botão
+     - @keyframes slideDown → animação
+   
+   • JavaScript (linhas 450, 491-496, 504-522):
+     - Lista de produtos com ID único
+     - Botão de toggle no header
+     - Função toggleProdutos() → expandir/colapsar
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+✅ BENEFÍCIOS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ Busca Mais Precisa
+   • Modalidade inclusa melhora relevância
+   • Produtos mais adequados ao contexto
+   • Score mais justo e representativo
+
+✅ Interface Mais Limpa
+   • Página não fica gigante
+   • Fácil navegar entre materiais
+   • Ver estatísticas sem scroll infinito
+
+✅ Melhor Usabilidade
+   • Expandir apenas o que interessa
+   • Comparar estatísticas rapidamente
+   • Menos informação visual sobrecarregada
+
+✅ Performance
+   • Renderização mais rápida (menos DOM)
+   • Scroll mais suave
+   • Melhor para muitos materiais
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🚀 COMO USAR
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. Reprocessar as partes para aplicar as mudanças:
+   
+   ./dividir.sh -n 10
+   ./processar.sh -p 1
+   ./processar.sh -p 2
+   # ... etc
+
+2. Gerar índice:
+   
+   ./gerar_indice.sh
+
+3. Abrir no navegador:
+   
+   xdg-open output/paginas_html/index.html
+
+4. Usar a interface:
+   
+   • Produtos estão ESCONDIDOS inicialmente
+   • Click em "Mostrar Produtos" para expandir
+   • Click em "Esconder Produtos" para colapsar
+   • Remover produtos irrelevantes (se houver)
+   • Exportar para Excel quando pronto
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+💡 DICAS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+• Produtos começam escondidos → mais organizado
+• Expandir apenas os materiais de interesse
+• Estatísticas sempre visíveis sem expandir
+• Botão muda de cor ao expandir
+• Cada material é independente
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📚 COMPATIBILIDADE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ Páginas antigas continuam funcionando
+✅ Exportação Excel não mudou
+✅ Funcionalidades anteriores preservadas
+✅ Apenas melhorias visuais e de busca
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ Sistema agora busca com termo completo e interface colapsável!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+

@@ -1,0 +1,54 @@
+╔════════════════════════════════════════════════════════════════╗
+║                                                                ║
+║    🚀 SISTEMA DE BUSCA INTELIGENTE DE PREÇOS                  ║
+║                                                                ║
+║    📋 COMECE AQUI:                                            ║
+║                                                                ║
+║    1. Leia: INICIO_AQUI.md                                    ║
+║    2. Execute: python3 testar_paginas_estaticas.py -n 5       ║
+║    3. Siga: FLUXO_RECOMENDADO.md                             ║
+║                                                                ║
+║    ⚡ COMANDOS RÁPIDOS: COMANDOS_RAPIDOS.md                   ║
+║    📂 ESTRUTURA: ESTRUTURA.md                                 ║
+║                                                                ║
+╚════════════════════════════════════════════════════════════════╝
+
+📁 ARQUIVOS PRINCIPAIS:
+
+   🎯 SCRIPTS:
+   • dividir_planilha.py          → Divide materiais.xlsx em 6 partes
+   • processar_parte.py           → ⭐ Processa uma parte (RECOMENDADO)
+   • gerar_indice.py              → Gera página índice
+   • testar_paginas_estaticas.py  → Teste rápido
+
+   📖 DOCUMENTAÇÃO:
+   • INICIO_AQUI.md               → 🚀 Comece por aqui!
+   • FLUXO_RECOMENDADO.md        → Fluxo detalhado
+   • COMANDOS_RAPIDOS.md         → ⚡ Referência rápida
+   • README.md                    → Visão geral
+   • ESTRUTURA.md                 → Estrutura do projeto
+
+   📊 DADOS:
+   • materiais.xlsx               → Planilha original (3306 materiais)
+
+═══════════════════════════════════════════════════════════════════
+
+🎯 TESTE RÁPIDO (30 segundos):
+
+   python3 testar_paginas_estaticas.py -n 5
+
+═══════════════════════════════════════════════════════════════════
+
+🔄 FLUXO COMPLETO:
+
+   1. python3 dividir_planilha.py              # Divide em 6 partes
+   2. python3 processar_parte.py               # Modo interativo
+   3. python3 gerar_indice.py                  # Gera índice
+   4. xdg-open paginas_html/index.html         # Visualiza
+
+═══════════════════════════════════════════════════════════════════
+
+📦 BACKUP: backup_antigo/
+   (Scripts e documentação antiga - não necessários)
+
+═══════════════════════════════════════════════════════════════════

@@ -1,0 +1,125 @@
+╔══════════════════════════════════════════════════════════════════════╗
+║                                                                      ║
+║          ✅ DIVISÃO CONFIGURÁVEL IMPLEMENTADA                       ║
+║                                                                      ║
+╚══════════════════════════════════════════════════════════════════════╝
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📝 O QUE FOI FEITO
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ Script dividir_planilha.py JÁ ESTAVA CONFIGURÁVEL
+   (já tinha parâmetro -n para número de partes!)
+
+✅ Melhorado dividir.sh com instruções de uso
+
+✅ Atualizado README.md com:
+   - Exemplos de uso com diferentes números de partes
+   - Tabela comparativa de desempenho
+   - Recomendações de divisão
+
+✅ Criada documentação completa:
+   - docs/GUIA_DIVISAO.md (guia detalhado)
+   - docs/EXEMPLOS_DIVISAO.txt (referência rápida)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🚀 COMO USAR AGORA
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Opção 1: Script Shell (Mais Fácil)
+────────────────────────────────────────────────────────────────────
+
+   ./dividir.sh              # Padrão: 6 partes
+   ./dividir.sh -n 10        # 10 partes
+   ./dividir.sh -n 20        # 20 partes
+   ./dividir.sh -n 3         # 3 partes
+
+Opção 2: Python Direto
+────────────────────────────────────────────────────────────────────
+
+   cd scripts
+   python3 dividir_planilha.py -n 10
+   python3 dividir_planilha.py -n 20
+   python3 dividir_planilha.py --help    # Ver todas as opções
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📊 RECOMENDAÇÕES DE PARTES (3306 materiais)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+   3 partes  🐢  → ~1102 materiais/parte  (processamento lento)
+   6 partes  📦  → ~551 materiais/parte   (padrão balanceado)
+   10 partes ⭐  → ~330 materiais/parte   (rápido)
+   20 partes ⚡  → ~165 materiais/parte   (ultra rápido)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+⏱️ TEMPO DE PROCESSAMENTO (SCRAPING)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Processamento SEQUENCIAL (uma parte por vez):
+   3 partes  → ~5h 30min
+   6 partes  → ~4h
+   10 partes → ~5h 30min
+   20 partes → ~2h 20min
+
+Processamento PARALELO (todas ao mesmo tempo):
+   3 partes  → ~1h 50min
+   6 partes  → ~40 min
+   10 partes → ~14 min      ⭐ RECOMENDADO
+   20 partes → ~7 min       ⚡ MAIS RÁPIDO
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+💡 DICA: PROCESSAMENTO EM PARALELO
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Para terminar em ~14 minutos:
+
+1. Dividir em 10 partes:
+   ./dividir.sh -n 10
+
+2. Abrir 10 terminais simultaneamente e executar:
+   Terminal 1: ./processar.sh -p 1
+   Terminal 2: ./processar.sh -p 2
+   Terminal 3: ./processar.sh -p 3
+   ... até Terminal 10
+
+3. Aguardar ~14 minutos ☕
+
+4. Gerar índice:
+   ./gerar_indice.sh
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📚 DOCUMENTAÇÃO COMPLETA
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📖 docs/GUIA_DIVISAO.md
+   - Guia completo sobre divisão de planilhas
+   - Cenários de uso detalhados
+   - Troubleshooting
+
+📄 docs/EXEMPLOS_DIVISAO.txt
+   - Referência rápida visual
+   - Exemplos de comandos prontos
+
+📋 README.md
+   - Visão geral atualizada com exemplos
+   - Tabela comparativa de desempenho
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🎯 TESTE AGORA!
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+   # Ver ajuda
+   ./dividir.sh -h
+
+   # Dividir em 10 partes (recomendado)
+   ./dividir.sh -n 10
+
+   # Ver arquivos gerados
+   ls -lh output/partes/
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ Sistema totalmente configurável e pronto para uso!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+

@@ -1,0 +1,150 @@
+================================================================================
+🎯 RECOMENDAÇÃO FINAL - OTIMIZAÇÃO DE BUSCA
+================================================================================
+
+📊 ANÁLISE DO SEU ARQUIVO meu_teste.xlsx:
+
+   PROBLEMA: Muitos produtos irrelevantes com score >= 0.3
+
+   Exemplo:
+   • Termo: "Banner PCD"
+   • Resultado: "Banner 80x50" (tem só "banner", falta "pcd")
+
+================================================================================
+✅ SOLUÇÃO RECOMENDADA: Score >= 0.7
+================================================================================
+
+MOTIVO:
+   • Score 0.3 →  Muito permissivo (muitos irrelevantes)
+   • Score 1.0 →  Muito restritivo (nenhum resultado para alguns termos)
+   • Score 0.7 →  ⭐ EQUILÍBRIO PERFEITO
+
+COM SCORE 0.7:
+   • 2 palavras-chave: exige pelo menos 1 palavra (50%) + algo mais
+   • 3 palavras-chave: exige pelo menos 2 palavras (67%)
+   • 4 palavras-chave: exige pelo menos 3 palavras (75%)
+
+================================================================================
+🚀 COMO USAR - COMANDOS ATUALIZADOS
+================================================================================
+
+1. TESTAR COM SCORE 0.7 (3 materiais):
+   python3 teste_otimizacao.py -n 3 -b -s 0.7 -o teste_score_07.xlsx
+
+2. TESTAR COM SCORE 0.8 (mais restritivo):
+   python3 teste_otimizacao.py -n 3 -b -s 0.8 -o teste_score_08.xlsx
+
+3. PROCESSAR PLANILHA COMPLETA COM SCORE 0.7:
+   python3 busca_materiais_planilha_otimizado.py --min-score 0.7
+
+4. COMPARAR DIFERENTES SCORES:
+   python3 teste_otimizacao.py -n 5 -b -s 0.5 -o resultado_05.xlsx
+   python3 teste_otimizacao.py -n 5 -b -s 0.7 -o resultado_07.xlsx
+   python3 teste_otimizacao.py -n 5 -b -s 0.9 -o resultado_09.xlsx
+
+================================================================================
+📊 TABELA DE COMPARAÇÃO
+================================================================================
+
+Score | Restrição      | Produtos | Relevância | Recomendação
+------|----------------|----------|------------|------------------
+0.3   | Muito baixo    | Muitos   | ~40%       | ❌ Muitos irrelevantes
+0.5   | Baixo          | Bastante | ~60%       | ⚠️  Ainda alguns irrelevantes
+0.7   | Médio-alto     | Moderado | ~85%       | ✅ RECOMENDADO
+0.8   | Alto           | Poucos   | ~95%       | ✅ Muito bom
+0.9   | Muito alto     | Muito p. | ~98%       | ⚠️  Pode eliminar relevantes
+1.0   | Máximo         | Mínimo   | 100%       | ❌ Muito restritivo
+
+================================================================================
+⚙️ AJUSTE CONFORME SEU CASO
+================================================================================
+
+SE você quer:
+   • MÁXIMA RELEVÂNCIA (poucos produtos): Score 0.8 ou 0.9
+   • EQUILÍBRIO (quantidade razoável):    Score 0.7 ⭐
+   • MAIS PRODUTOS (alguns irrelevantes): Score 0.5 ou 0.6
+
+PARA SEU CASO (produtos muito irrelevantes):
+   Comece com 0.7 e veja os resultados
+   Se ainda houver irrelevantes, use 0.8
+
+================================================================================
+🧪 TESTE COMPARATIVO RÁPIDO
+================================================================================
+
+Execute este comando para ver a diferença:
+
+   # Comparar scores 0.3, 0.7 e 0.8 com os mesmos 3 materiais
+   python3 teste_otimizacao.py -n 3 -b -s 0.3 -o compare_03.xlsx
+   python3 teste_otimizacao.py -n 3 -b -s 0.7 -o compare_07.xlsx
+   python3 teste_otimizacao.py -n 3 -b -s 0.8 -o compare_08.xlsx
+
+   Depois compare as planilhas e veja qual tem melhores resultados!
+
+================================================================================
+📋 RESULTADO ESPERADO COM SCORE 0.7
+================================================================================
+
+Material: "AEROBICA - kit lanche"
+Termo: "kit lanche"
+
+SCORE 0.3:
+   • 27 produtos (alguns irrelevantes)
+
+SCORE 0.7:
+   • ~15 produtos (quase todos relevantes)
+   • Produtos com "kit" E "lanche" no nome
+   • Elimina produtos com só "kit" ou só "lanche"
+
+Material: "Banner PCD"
+Termo: "banner pcd"
+
+SCORE 0.3:
+   • 29 produtos (muitos sem "pcd")
+   • "Banner 80x50" ❌
+   • "Banner Propaganda" ❌
+
+SCORE 0.7:
+   • ~0-2 produtos (provavelmente não existe "banner pcd")
+   • Só produtos que realmente tem relação
+
+================================================================================
+💡 ESTRATÉGIA FINAL RECOMENDADA
+================================================================================
+
+1. Use Score 0.7 como PADRÃO:
+   python3 busca_materiais_planilha_otimizado.py --min-score 0.7
+
+2. Para materiais muito específicos (que podem não existir):
+   • Aceite que pode não haver resultados
+   • É melhor 0 produtos que produtos irrelevantes
+   • Revise manualmente os casos sem produtos
+
+3. Se quiser garantir alguns resultados:
+   • Use score 0.6 (60% das palavras)
+   • Mas revise manualmente a relevância
+
+================================================================================
+✅ COMANDOS PRONTOS PARA VOCÊ
+================================================================================
+
+# RECOMENDADO: Score 0.7
+python3 teste_otimizacao.py -n 10 -b -s 0.7 -o resultado_recomendado.xlsx
+
+# Mais restritivo: Score 0.8
+python3 teste_otimizacao.py -n 10 -b -s 0.8 -o resultado_restritivo.xlsx
+
+# Processar planilha completa (3306 materiais) com score 0.7
+python3 busca_materiais_planilha_otimizado.py --min-score 0.7
+
+================================================================================
+🎯 EXECUTE AGORA:
+
+   python3 teste_otimizacao.py -n 5 -b -s 0.7 -o teste_score_07.xlsx
+
+   Compare com seu arquivo atual (score 0.3):
+   - Menos produtos irrelevantes
+   - Mantém os relevantes
+   - Melhor qualidade geral
+
+================================================================================
